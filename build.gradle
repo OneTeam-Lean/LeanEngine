@@ -10,7 +10,7 @@
 plugins {
     id 'org.springframework.boot' version '2.2.0.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id "com.github.sherter.google-java-format" version "0.7.1"
+    id "com.github.sherter.google-java-format" version "0.8"
     id 'java'
 }
 
@@ -46,10 +46,6 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
-task makeFileExec(type: Exec) {
-    commandLine 'chmod', '700', 'config/githook/pre-commit'
-    commandLine 'chmod', '700', 'config/githook/pre-push'
-}
 test {
     useJUnitPlatform()
 }
@@ -58,4 +54,10 @@ task initGitHooks {
     ['sh', '-c', 'git config core.hooksPath config/githook'].execute().text.trim()
 
 }
-compileJava.dependsOn makeFileExec
+import com.github.sherter.googlejavaformatgradleplugin.VerifyGoogleJavaFormat
+
+task verifyFormatting(type: VerifyGoogleJavaFormat) {
+    source 'src/main'
+    include '**/*.java'
+    ignoreFailures true
+}
