@@ -52,4 +52,6 @@ test {
 
 task initGitHooks {
     ['sh', '-c', 'git config core.hooksPath .githooks'].execute().text.trim()
+    ['sh', '-c', '+X .githooks'].execute()
+
 }
