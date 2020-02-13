@@ -18,13 +18,13 @@ case "$1" in
     exit 0
     ;;
   "health")
-    curl -s http://localhost:8081/actuator/health | jq "."
+    curl -s http://localhost:8080/actuator/health
     ;;
   "format")
     ./gradlew goJF
     ;;
   "info")
-    curl -s http://localhost:8081/actuator/info | jq "."
+    curl -s http://localhost:8080/actuator/info
     ;;
   "clean")
     ./gradlew clean
