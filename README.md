@@ -22,6 +22,17 @@
 - `[Style]`: CODE style (not front-end style), code formatting, missing semicolon etc.
 - `[Docs]`: changes to the documentation, comment etc.
 
+## 技术栈
+- Java, jdk8
+- MySql, 
+- Gradle, 5.6.3
+- Spring 
+- Spring Boot
+- Spring Data JPA
+- Flyway
+- Docker
+- Docker Compose
+
 ## 项目基本命令
 - `./go docker` 启动 local docker
 - `./go run` 启动 bootRun
