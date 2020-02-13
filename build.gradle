@@ -10,12 +10,12 @@
 plugins {
     id 'org.springframework.boot' version '2.2.0.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id "com.github.sherter.google-java-format" version "0.7.1"
     id 'java'
 }
 
 group = 'leanengin'
 version = '1.0.0-SNAPSHOT'
-sourceCompatibility = '1.8'
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
@@ -25,25 +25,31 @@ ext {
     lombokVersion = "1.18.4"
 }
 dependencies {
-    testImplementation 'junit:junit:4.12'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor(
             "org.projectlombok:lombok:${lombokVersion}",
     )
+
+
+
+    runtimeOnly 'mysql:mysql-connector-java'
+
+
+    testImplementation 'junit:junit:4.12'
     testAnnotationProcessor(
             "org.projectlombok:lombok:${lombokVersion}",
     )
-    implementation "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
 
 test {
     useJUnitPlatform()
 }
 
-// In this section you declare where to find the dependencies of your project
 task initGitHooks {
     ['sh', '-c', 'git config core.hooksPath .githooks'].execute().text.trim()
 }

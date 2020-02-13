@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LeanEngineApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(LeanEngineApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(LeanEngineApplication.class, args);
+  }
 }

@@ -22,4 +22,10 @@
 - `[Style]`: CODE style (not front-end style), code formatting, missing semicolon etc.
 - `[Docs]`: changes to the documentation, comment etc.
 
+## 项目基本命令
+- `./go docker` 启动 local docker
+- `./go run` 启动 bootRun
+- `./go format` 格式化文件
+- `./go clean` gradlew clean
+- `./go ci` gradlew clean build
 
