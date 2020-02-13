@@ -13,3 +13,11 @@
 ## 相关地址
 - [Kanban](https://www.teambition.com/project/5e44074c78c0fe0022a10382/tasks/view/all)   
 - https://github.com/crowhyc/LeanEngine.git
+
+## 代码提交规范
+1.使用中括号包含本次操作的目标
+
+- `[Add]` `[Update]` `[Del]` `[Refactor]`   
+
+2.在操作目标后空格一个，然后用中文或者英文准确描述本次提交的内容以。或者.结尾 
+
