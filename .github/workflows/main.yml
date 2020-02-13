@@ -9,14 +9,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Google Java Format
+      uses: axel-op/googlejavaformat-action@v2.0.0
     - name: Run a one-line script
       run: echo Hello, world!
     - name: Run a multi-line script
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
-    - name: Setup Java JDK
-      uses: actions/setup-java@v1.3.0
+    - name: Gradle Build
+      uses: eskatos/gradle-command-action@v1
       with:
-        # The Java version to make available on the path. Takes a whole or semver Java version, or 1.x syntax (e.g. 1.8 => Java 8.x)
-        java-version: jdk1.8
+        # Gradle version to use
+        gradle-version: 5.6.2
+        # Gradle command line arguments, see gradle --help
+        arguments: clean build
