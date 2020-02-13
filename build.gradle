@@ -45,13 +45,16 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
-
+task makeFileExec(type: Exec) {
+    commandLine 'chmod', '700', 'config/githook/pre-commit'
+    commandLine 'chmod', '700', 'config/githook/pre-push'
+}
 test {
     useJUnitPlatform()
 }
 
 task initGitHooks {
-    ['sh', '-c', 'git config core.hooksPath .githooks'].execute().text.trim()
-    ['sh', '-c', '+X .githooks'].execute()
+    ['sh', '-c', 'git config core.hooksPath config/githook'].execute().text.trim()
 
 }
+compileJava.dependsOn makeFileExec
