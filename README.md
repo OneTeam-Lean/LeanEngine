@@ -9,3 +9,7 @@
 
 - 【我们的方案是】   
 使用目前主流的各种前后端技术和基础设施。我们也非常愿意尝试更加 geek 的工具/框架/思维
+
+## 相关地址
+- [Kanban](https://www.teambition.com/project/5e44074c78c0fe0022a10382/tasks/view/all)   
+- https://github.com/crowhyc/LeanEngine.git
