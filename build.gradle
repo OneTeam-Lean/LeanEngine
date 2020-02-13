@@ -28,3 +28,6 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
+task initGitHooks {
+    [ 'sh', '-c', 'git config core.hooksPath .githooks' ].execute().text.trim()
+}

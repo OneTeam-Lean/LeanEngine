@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+COMMIT_MSG_MAX_LENGTH = 1000
+COMMIT_FORMAT_POLICY_TAG = "[COMMIT_FORMAT_POLICY] ERROR::"
+COMMIT_ERROR_BANNER = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+$COMMIT_FORMAT_REGEX = /^\[(Chore|Docs|Feat|Fix|Refactor|Style|Test)\]\:[\sA-z0-9\-\.,_\"]+$/
+
+message_file = ARGV[0]
+message = File.read(message_file)
+
+if message.include? "This reverts commit"
+  exit 0
+end
+
+if message.include? "It looks like you may be committing a cherry-pick"
+  exit 0
+end
+
+if message.start_with? "Merge branch"
+  exit 0
+end
+
+if message.length > COMMIT_MSG_MAX_LENGTH
+  puts COMMIT_ERROR_BANNER
+  puts "#{COMMIT_FORMAT_POLICY_TAG} Commit message length #{message.length} exceeds the maximum allowed length: #{COMMIT_MSG_MAX_LENGTH}."
+  puts COMMIT_ERROR_BANNER
+  exit 1
+end
+
+if !$COMMIT_FORMAT_REGEX.match(message)
+  puts COMMIT_ERROR_BANNER
+  puts "#{COMMIT_FORMAT_POLICY_TAG} Commit message format invalid. Please follow the format as follows:"
+  puts "[Chore|Docs|Feat|Fix|Refactor|Style|Test]: your_commit_message."
+  puts "E.g."
+  puts "[Feat]: error message not displaying correctly when WIP creation failed."
+  puts "Or:"
+  puts "[Fix]: publish the correct version of accessory import template."
+  puts "Verb list:"
+  puts "  Feat     - new feature for the USER, not a new feature for build script"
+  puts "  Fix      - bug fix for the USER, not a fix to a build script"
+  puts "  Refactor - refactoring production code e.g. renaming a variable"
+  puts "  Chore    - updating gradle version etc., no production code change"
+  puts "  Style    - CODE style (not front-end style), code formatting, missing semicolon etc.,"
+  puts "  Docs     - changes to the documentation, comment etc."
+  puts COMMIT_ERROR_BANNER
+  exit 1
+end
+

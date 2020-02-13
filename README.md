@@ -15,14 +15,11 @@
 - https://github.com/crowhyc/LeanEngine.git
 
 ## 代码提交规范
-1.使用中括号包含本次操作的目标
+- `[Feat]`: new feature for the USER, not a new feature for build script
+- `[Fix]`: bug fix for the USER, not a fix to a build script
+- `[Refactor]`: refactoring production code e.g. renaming a variable
+- `[Chore]`: updating gradle version etc., no production code change
+- `[Style]`: CODE style (not front-end style), code formatting, missing semicolon etc.
+- `[Docs]`: changes to the documentation, comment etc.
 
-- `[Feat]` 添加功能
-- `[Update]` 修改功能
-- `[Del]` 删除功能
-- `[Refactor]` 重构
-- `[Fix]` 修复
-- `[Chore]` 构建过程或辅助工具的变动
-
-2.在操作目标后空格一个，然后用中文或者英文准确描述本次提交的内容以。或者.结尾 
 
