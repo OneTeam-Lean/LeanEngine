@@ -35,6 +35,7 @@ case "$1" in
     exit 0
     ;;
   *)
+    ./gradlew goJF
     ./gradlew clean build
     exit 0
     ;;

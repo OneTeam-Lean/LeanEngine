@@ -40,3 +40,7 @@
 - `./go clean` gradlew clean
 - `./go ci` gradlew clean build
 
+## 项目其他说明
+
+本项目使用了代码统一格式的管理，主要是为了减少因为 format code 导致的 commit。
+在提交前请使用`./go format` 命令格式化项目代码，同时在 commit 之前也会自动验证格式。
