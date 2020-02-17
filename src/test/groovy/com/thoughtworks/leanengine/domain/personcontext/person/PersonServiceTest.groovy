@@ -3,7 +3,6 @@ package com.thoughtworks.leanengine.domain.personcontext.person
 import com.thoughtworks.leanengine.infra.repo.PersonRepository
 import com.thoughtworks.leanengine.infra.repo.po.person.PersonPO
 import spock.lang.Specification
-
 class PersonServiceTest extends Specification {
     private PersonService personService
     private PersonRepository personRepository
@@ -12,7 +11,6 @@ class PersonServiceTest extends Specification {
         personRepository = Stub(PersonRepository.class)
         personService = new PersonService(personRepository)
     }
-
     def "return 3 persons when find all person"() {
         given:
         def personList = new ArrayList<>()
