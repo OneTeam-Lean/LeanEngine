@@ -12,6 +12,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id "com.github.sherter.google-java-format" version "0.8"
     id 'java'
+    id 'idea'
     id "org.flywaydb.flyway" version "6.2.3"
 }
 
@@ -38,7 +39,7 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
 
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
     testAnnotationProcessor(
             "org.projectlombok:lombok:${lombokVersion}",
     )
@@ -53,7 +54,10 @@ flyway {
     user = 'root'
 }
 test {
-    useJUnit()
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
     exclude 'com/thoughtworks/leanengine/JpaTestBase.class'
 }
 
