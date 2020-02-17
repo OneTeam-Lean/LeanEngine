@@ -4,6 +4,7 @@ set -x
 
 # run the tests with the gradle wrapper
 ./gradlew verifyGoogleJavaFormat
+./gradlew flywayValidate
 
 # store the last exit code in a variable
 RESULT=$?

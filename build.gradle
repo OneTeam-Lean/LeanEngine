@@ -31,11 +31,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation "org.projectlombok:lombok:${lombokVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.flywaydb:flyway-core'
     annotationProcessor(
             "org.projectlombok:lombok:${lombokVersion}",
     )
-
-
     runtimeOnly 'mysql:mysql-connector-java'
 
 
@@ -46,6 +45,8 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testImplementation 'org.flywaydb.flyway-test-extensions:flyway-spring-test:6.0.0'
+    testImplementation "org.mockito:mockito-core:2.+"
 }
 flyway {
     url = 'jdbc:mysql://localhost:3306/leanengine'
@@ -65,4 +66,7 @@ task verifyFormatting(type: VerifyGoogleJavaFormat) {
     source 'src/main'
     include '**/*.java'
     ignoreFailures true
+}
+task testFlyway(){
+
 }

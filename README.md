@@ -32,6 +32,8 @@
 - Flyway
 - Docker
 - Docker Compose
+- Mockito
+- GoogleJavaFormat
 
 ## 项目基本命令
 - `./go docker` 启动 local docker
