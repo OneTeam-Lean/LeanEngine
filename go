@@ -34,6 +34,9 @@ case "$1" in
     ./gradlew clean build
     exit 0
     ;;
+  "migration")
+    ./gradlew flywayMigrate -i
+    ;;
   *)
     ./gradlew goJF
     ./gradlew clean build

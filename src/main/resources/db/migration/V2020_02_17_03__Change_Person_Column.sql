@@ -1,0 +1,1 @@
+ALTER TABLE person add COLUMN NOTE text comment '备注';

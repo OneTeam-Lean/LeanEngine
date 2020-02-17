@@ -12,6 +12,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id "com.github.sherter.google-java-format" version "0.8"
     id 'java'
+    id "org.flywaydb.flyway" version "6.2.3"
 }
 
 group = 'leanengin'
@@ -21,6 +22,7 @@ repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
     mavenCentral()
 }
+
 ext {
     lombokVersion = "1.18.4"
 }
@@ -34,7 +36,6 @@ dependencies {
     )
 
 
-
     runtimeOnly 'mysql:mysql-connector-java'
 
 
@@ -45,6 +46,10 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+}
+flyway {
+    url = 'jdbc:mysql://localhost:3306/leanengine'
+    user = 'root'
 }
 test {
     useJUnitPlatform()
