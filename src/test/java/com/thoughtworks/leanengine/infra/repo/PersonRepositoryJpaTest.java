@@ -5,9 +5,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.thoughtworks.leanengine.JpaTestBase;
+import com.thoughtworks.leanengine.domain.personcontext.person.Person;
+import com.thoughtworks.leanengine.infra.JpaTestBase;
 import com.thoughtworks.leanengine.infra.repo.po.person.PersonPO;
-import com.thoughtworks.leanengine.personcontext.Person.Person;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;

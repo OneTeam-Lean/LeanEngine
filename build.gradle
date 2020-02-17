@@ -14,6 +14,7 @@ plugins {
     id 'java'
     id 'idea'
     id "org.flywaydb.flyway" version "6.2.3"
+    id 'groovy'
 }
 
 group = 'leanengin'
@@ -21,6 +22,7 @@ version = '1.0.0-SNAPSHOT'
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'https://jitpack.io' }
     mavenCentral()
 }
 
@@ -37,7 +39,7 @@ dependencies {
             "org.projectlombok:lombok:${lombokVersion}",
     )
     runtimeOnly 'mysql:mysql-connector-java'
-
+    implementation "org.codehaus.groovy:groovy-all:2.5.8"
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
     testAnnotationProcessor(
@@ -48,6 +50,8 @@ dependencies {
     }
     testImplementation 'org.flywaydb.flyway-test-extensions:flyway-spring-test:6.0.0'
     testImplementation "org.mockito:mockito-core:2.+"
+    testImplementation 'org.spockframework.spock:spock-core:spock-1.3'
+    testImplementation 'org.spockframework.spock:spock-spring:spock-1.3'
 }
 flyway {
     url = 'jdbc:mysql://localhost:3306/leanengine'

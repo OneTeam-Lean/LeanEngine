@@ -1,7 +1,7 @@
 package com.thoughtworks.leanengine.infra.repo.po.person;
 
+import com.thoughtworks.leanengine.domain.personcontext.person.Person;
 import com.thoughtworks.leanengine.infra.repo.po.PersistenceObject;
-import com.thoughtworks.leanengine.personcontext.Person.Person;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

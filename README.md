@@ -34,6 +34,7 @@
 - Docker Compose
 - Mockito
 - GoogleJavaFormat
+- Spock2.0
 
 ## 项目基本命令
 - `./go docker` 启动 local docker

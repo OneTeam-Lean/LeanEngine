@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine;
+package com.thoughtworks.leanengine.infra;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

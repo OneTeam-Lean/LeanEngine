@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.personcontext.Person;
+package com.thoughtworks.leanengine.domain.personcontext.person;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
