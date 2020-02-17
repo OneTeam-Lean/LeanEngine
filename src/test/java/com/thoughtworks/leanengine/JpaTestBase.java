@@ -11,5 +11,5 @@ import org.springframework.test.context.junit4.SpringRunner;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class JpaTestBase {
-  @Autowired private TestEntityManager entityManager;
+  @Autowired private TestEntityManager entdityManager;
 }
