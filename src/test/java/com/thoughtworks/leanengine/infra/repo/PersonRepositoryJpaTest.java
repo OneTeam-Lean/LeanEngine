@@ -45,22 +45,22 @@ public class PersonRepositoryJpaTest extends JpaTestBase {
 
   @Test
   public void return_3_persons_when_find_all() {
-    List<PersonPO> all = (List<PersonPO>) personRepo.findAll();
+    List<PersonPO> all = personRepo.findAll();
     assertThat(all.size(), is(3));
   }
 
   @Test
   public void return_2_persons_when_delete_one() {
-    List<PersonPO> personPOS = (List<PersonPO>) personRepo.findAll();
+    List<PersonPO> personPOS = personRepo.findAll();
     Long needDeleteId = personPOS.get(1).getId();
     personRepo.deleteById(needDeleteId);
-    List<PersonPO> deletedPersons = (List<PersonPO>) personRepo.findAll();
+    List<PersonPO> deletedPersons = personRepo.findAll();
     assertThat(deletedPersons.size(), is(2));
   }
 
   @Test
   public void return_name_is_changed_when_save_person_change_name() {
-    List<PersonPO> personPOS = (List<PersonPO>) personRepo.findAll();
+    List<PersonPO> personPOS = personRepo.findAll();
     PersonPO originPerson = personPOS.get(1);
     PersonPO changedPerson = new PersonPO(originPerson.getId(), "changed", originPerson.getNote());
     personRepo.save(changedPerson);

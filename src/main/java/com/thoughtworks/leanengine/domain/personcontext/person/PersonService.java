@@ -16,7 +16,7 @@ public class PersonService {
   private final PersonRepository personRepository;
 
   public List<Person> queryAllPersons() {
-    List<PersonPO> all = (List<PersonPO>) personRepository.findAll();
+    List<PersonPO> all = personRepository.findAll();
     return all.stream().map(PersonPO::toDomainModel).collect(Collectors.toList());
   }
 }

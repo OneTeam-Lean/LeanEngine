@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter
-@Entity
 @Table(name = "person")
+@Entity
 @NoArgsConstructor
 public class PersonPO implements PersistenceObject<Person> {
   @Id
