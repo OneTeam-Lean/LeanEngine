@@ -1,0 +1,10 @@
+PERSON:
+ - id: 1L
+   name: person1
+   note: note
+ - id: 2L
+   name: person2
+   note: note
+ - id: 3L
+   name: person3
+   note: note

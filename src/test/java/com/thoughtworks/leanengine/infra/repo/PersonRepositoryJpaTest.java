@@ -5,28 +5,21 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.thoughtworks.leanengine.domain.personcontext.person.Person;
 import com.thoughtworks.leanengine.infra.JpaTestBase;
 import com.thoughtworks.leanengine.infra.repo.po.person.PersonPO;
 import java.util.List;
 import java.util.Optional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@DatabaseSetup("classpath:data/person.xml")
+@DatabaseTearDown
 public class PersonRepositoryJpaTest extends JpaTestBase {
 
   @Autowired private PersonRepository personRepo;
-
-  @BeforeEach
-  public void prepareData() {
-    Person person1 = new Person("test1", "note1");
-    Person person2 = new Person("test1", "note1");
-    Person person3 = new Person("test1", "note1");
-    personRepo.save(PersonPO.of(person1));
-    personRepo.save(PersonPO.of(person2));
-    personRepo.save(PersonPO.of(person3));
-  }
 
   @Test
   public void return_3_size_when_count_person() {

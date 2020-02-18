@@ -1,12 +1,11 @@
 spring:
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/leanengine
     username: root
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/leanengine?setUnicode=true&characterEncoding=utf8
+  flyway:
+    enabled: true
   jpa:
     hibernate:
       ddl-auto: update
-      show-sql: true
+    show-sql: true
