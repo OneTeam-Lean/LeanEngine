@@ -12,7 +12,7 @@
 
 ## 相关地址
 - [Kanban](https://www.teambition.com/project/5e44074c78c0fe0022a10382/tasks/view/all)   
-- [https://github.com/crowhyc/LeanEngine.git](https://github.com/crowhyc/LeanEngine.git)
+- [https://github.com/OneTeam-Lean/LeanEngine.git](https://github.com/OneTeam-Lean/LeanEngine.git)
 - [CI](http://ec2-52-82-123-155.cn-northwest-1.compute.amazonaws.com.cn:9000/), UserName: admin
 
 ## 代码提交规范
