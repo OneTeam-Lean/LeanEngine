@@ -1,29 +1,34 @@
 package com.thoughtworks.leanengine.infra.conf;
 
-import javax.persistence.EntityManagerFactory;
+import com.github.springtestdbunit.bean.DatabaseConfigBean;
+import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 import javax.sql.DataSource;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.dbunit.database.DatabaseDataSourceConnection;
+import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
 
 @TestConfiguration
 public class DataTestConfiguration {
 
-  @Bean(name = "entityManagerFactory")
-  public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-      EntityManagerFactoryBuilder builder, DataSource dataSource) {
-    return builder
-        .dataSource(dataSource)
-        .packages("com.thoughtworks.leanengine")
-        .persistenceUnit("com.thoughtworks.leanengine.infra.repo.po.PersistenceObject")
-        .build();
+  @Bean
+  public DatabaseConfigBean dbUnitDatabaseConfig() {
+    DatabaseConfigBean configBean = new DatabaseConfigBean();
+    configBean.setEscapePattern("`?`");
+    configBean.setDatatypeFactory(new MySqlDataTypeFactory());
+    return configBean;
   }
 
-  @Bean(name = "transactionManager")
-  public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-    return new JpaTransactionManager(entityManagerFactory);
+  @Bean(name = "dbUnitDatabaseConnection")
+  public DatabaseDataSourceConnection dbUnitDatabaseConnection(
+      DataSource dataSource, DatabaseConfigBean configBean) {
+    DatabaseDataSourceConnectionFactoryBean factoryBean =
+        new DatabaseDataSourceConnectionFactoryBean(dataSource);
+    factoryBean.setDatabaseConfig(configBean);
+    try {
+      return factoryBean.getObject();
+    } catch (Exception exception) {
+      throw new RuntimeException(exception);
+    }
   }
 }

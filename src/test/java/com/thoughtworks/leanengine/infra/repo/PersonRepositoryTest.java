@@ -7,17 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.thoughtworks.leanengine.ApiTestBase;
 import com.thoughtworks.leanengine.domain.personcontext.person.Person;
-import com.thoughtworks.leanengine.infra.JpaTestBase;
 import com.thoughtworks.leanengine.infra.repo.po.person.PersonPO;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@DatabaseSetup("classpath:data/person.xml")
-@DatabaseTearDown
-public class PersonRepositoryJpaTest extends JpaTestBase {
+@DatabaseSetup("/data/person.yml")
+@DatabaseTearDown("/data/person.yml")
+public class PersonRepositoryTest extends ApiTestBase {
 
   @Autowired private PersonRepository personRepo;
 
@@ -31,7 +31,7 @@ public class PersonRepositoryJpaTest extends JpaTestBase {
   public void return_1_when_insert_person() {
     Person person = new Person("test1", "note1");
     long originCnt = personRepo.count();
-    personRepo.save(PersonPO.of(person));
+    personRepo.saveAndFlush(PersonPO.of(person));
     long savedCnt = personRepo.count();
     assertThat(savedCnt - originCnt, equalTo(1L));
   }
@@ -61,7 +61,7 @@ public class PersonRepositoryJpaTest extends JpaTestBase {
     assertTrue(personById.isPresent());
     PersonPO personPO = personById.get();
     assertThat(personPO.getName(), is("changed"));
-    assertThat(personPO.getNote(), is("note1"));
+    assertThat(personPO.getNote(), is("note"));
     assertThat(personRepo.count(), is(3L));
   }
 }
