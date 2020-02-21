@@ -1,21 +1,14 @@
 package com.thoughtworks.leanengine.configure;
 
+import static io.restassured.RestAssured.when;
+
+import com.thoughtworks.leanengine.ApiTestBase;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@SpringBootTest
-@AutoConfigureMockMvc
-class SpringFoxConfigTest {
-  @Autowired MockMvc mockMvc;
+class SpringFoxConfigTest extends ApiTestBase {
 
   @Test
-  public void shouldEnableSwagger() throws Exception {
-    mockMvc.perform(get("/swagger-ui.html")).andExpect(status().is(200));
+  public void shouldEnableSwagger() {
+    when().get("/swagger-ui.html").then().statusCode(200);
   }
 }

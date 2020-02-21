@@ -8,7 +8,6 @@ spring:
       ddl-auto: update
   flyway:
     enabled: true
-
 management:
   endpoints:
     enabled-by-default: false

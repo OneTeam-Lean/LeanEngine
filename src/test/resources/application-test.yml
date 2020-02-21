@@ -1,11 +1,17 @@
 spring:
   datasource:
     username: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/leanengine?setUnicode=true&characterEncoding=utf8
+    driverClassName: org.mariadb.jdbc.Driver
+    password:
   flyway:
     enabled: true
   jpa:
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
+  boot:
+    mariadb4j:
+      databaseName: leanengine
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
