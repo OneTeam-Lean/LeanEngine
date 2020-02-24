@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Position {
-  private int position_x;
-  private int position_y;
+public class Size {
+  private int width;
+  private int height;
 }

@@ -2,6 +2,7 @@ package com.thoughtworks.leanengine.domain.workflowcontext.containers
 
 import spock.lang.Specification
 
+import static com.google.common.collect.Lists.newArrayList
 import static org.junit.jupiter.api.Assertions.assertNotNull
 import static org.junit.jupiter.api.Assertions.assertTrue
 
@@ -16,7 +17,7 @@ class WorkflowServiceTest extends Specification {
 
     def 'should add workflow success'() {
         given:
-        Workflow workflow = new Workflow("testWorkflow")
+        Workflow workflow = new Workflow("testWorkflow", newArrayList(), newArrayList(), newArrayList())
         when:
         workflowService.saveWorkflow(workflow)
         then:
