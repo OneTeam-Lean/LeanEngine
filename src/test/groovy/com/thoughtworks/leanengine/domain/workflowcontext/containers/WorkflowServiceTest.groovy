@@ -1,17 +1,16 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.containers
 
-
 import spock.lang.Specification
 
+import static org.junit.jupiter.api.Assertions.assertNotNull
 import static org.junit.jupiter.api.Assertions.assertTrue
-import static org.mockito.Mockito.mock
 
 class WorkflowServiceTest extends Specification {
 
     private WorkflowService workflowService
 
     void setup() {
-        workflowService = mock(WorkflowService.class)
+        workflowService = new WorkflowService()
 
     }
 
@@ -24,6 +23,11 @@ class WorkflowServiceTest extends Specification {
         assertTrue(true)
     }
 
-
+    def 'should query workflow success'() {
+        when:
+        Workflow workflowByName = workflowService.queryWorkflowByName("testWorkflow")
+        then:
+        assertNotNull(workflowByName)
+    }
 
 }
