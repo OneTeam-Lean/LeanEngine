@@ -1,3 +1,3 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
 
-public interface Gateway extends Component, Positional {}
+public abstract class Gateway implements Component, Positional {}
