@@ -43,6 +43,7 @@
 - `./go format` 格式化文件
 - `./go clean` gradlew clean
 - `./go ci` gradlew clean build
+- `./go image` 构建Docker镜像并推送到镜像仓库
 
 ## 项目其他说明
 

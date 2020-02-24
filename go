@@ -4,9 +4,13 @@ work_dir=`dirname $0`
 cd "$work_dir"
 echo " Working Directory: $work_dir "
 
-repository=
-tag=1
-app_image=online-reservation-api:${tag}
+epoch="0"
+version=$2
+tag=${epoch}.${version}
+docker_registry="ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9001"
+docker_repository="lean-engine"
+app_image_name=${docker_registry}/$docker_repository/workflow
+app_image_fullname=${app_image_name}:${tag}
 
 case "$1" in
   "docker")
@@ -32,6 +36,12 @@ case "$1" in
     ;;
   "ci")
     ./gradlew clean build
+    exit 0
+    ;;
+  "image")
+    ./gradlew clean build
+    sudo docker build --rm -t ${app_image_fullname} .
+    sudo docker push ${app_image_fullname}
     exit 0
     ;;
   "migration")
