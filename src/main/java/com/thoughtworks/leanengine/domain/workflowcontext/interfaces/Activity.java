@@ -1,3 +1,12 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
 
-public abstract class Activity implements Component {}
+import com.thoughtworks.leanengine.domain.workflowcontext.common.Status;
+import java.time.LocalDateTime;
+
+public abstract class Activity implements Component {
+  private String id;
+  private String name;
+  private Status status;
+  private LocalDateTime startTime;
+  private LocalDateTime endTime;
+}
