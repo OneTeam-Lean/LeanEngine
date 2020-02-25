@@ -1,3 +1,5 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
 
-public interface Component {}
+import java.io.Serializable;
+
+public interface Component extends Serializable {}

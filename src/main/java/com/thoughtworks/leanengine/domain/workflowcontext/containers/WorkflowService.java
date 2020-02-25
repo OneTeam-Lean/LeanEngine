@@ -1,18 +1,24 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.containers;
 
-import static com.google.common.collect.Lists.newArrayList;
-
-import java.util.List;
+import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
+import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WorkflowService {
+  private final WorkflowRepository workflowRepository;
+
+  public WorkflowService(WorkflowRepository workflowRepository) {
+    this.workflowRepository = workflowRepository;
+  }
 
   public void saveWorkflow(Workflow workflow) {}
 
   public Workflow queryWorkflowByName(String name) {
-    List<Lane> lanes = newArrayList();
-    lanes.add(new Lane("testLane", null, newArrayList()));
-    return new Workflow(null, name, lanes, newArrayList(), newArrayList());
+    WorkflowPO workflowPO = workflowRepository.findByName(name);
+    if (workflowPO == null) {
+      return null;
+    }
+    return workflowPO.toDomainModel();
   }
 }

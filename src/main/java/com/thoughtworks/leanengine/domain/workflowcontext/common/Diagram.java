@@ -1,3 +1,5 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
-public interface Diagram {}
+import java.io.Serializable;
+
+public interface Diagram extends Serializable {}

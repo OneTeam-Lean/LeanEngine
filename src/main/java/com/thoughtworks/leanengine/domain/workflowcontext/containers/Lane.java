@@ -9,6 +9,10 @@ public class Lane extends Container {
   private String laneId;
   private List<String> ComponentIds;
 
+  public Lane() {
+    super(null);
+  }
+
   public Lane(String name, String laneId, List<String> componentIds) {
     super(name);
     this.laneId = laneId;

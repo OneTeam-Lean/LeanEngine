@@ -1,20 +1,10 @@
 spring:
-  datasource:
-    username: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/leanengine?setUnicode=true&characterEncoding=utf8
-  jpa:
-    hibernate:
-      ddl-auto: update
-  flyway:
-    enabled: true
   data:
     mongodb:
-      database: leanengine
-      username: sa
-      password: sa
-      host: localhost
-      port: 27017
+      username: admin
+      password: tw2020
+      uri: mongodb://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9002
+      database: admin
 management:
   endpoints:
     enabled-by-default: false

@@ -9,12 +9,16 @@ import com.thoughtworks.leanengine.infra.util.MapperUtil;
 import java.util.List;
 import java.util.UUID;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.StringUtils;
 
 @Document(collection = "workflow")
 @Data
+@NoArgsConstructor
+@EqualsAndHashCode
 public class WorkflowPO implements PersistenceObject<Workflow> {
   @Id private String workflowId;
   private String name;
@@ -24,7 +28,7 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
 
   @Override
   public Workflow toDomainModel() {
-    return MapperUtil.map(this, Workflow.class);
+    return new Workflow(this.name, this.workflowId, this.lanes, this.components, this.diagrams);
   }
 
   public static WorkflowPO of(Workflow workflow) {
