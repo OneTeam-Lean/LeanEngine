@@ -4,9 +4,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.common.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
 import java.time.LocalDateTime;
-import lombok.ToString;
 
-@ToString
 public class ManualTask extends Activity {
   private String triggeredBy;
 

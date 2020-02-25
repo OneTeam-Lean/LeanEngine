@@ -2,10 +2,8 @@ package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
 import java.io.Serializable;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
-@ToString
 public class Position implements Serializable {
   private int position_x;
   private int position_y;

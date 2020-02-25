@@ -8,4 +8,8 @@ public class EndEvent extends Event {
   public EndEvent() {
     super(ComponentType.END_EVENT);
   }
+
+  public EndEvent(String id, String name) {
+    super(ComponentType.END_EVENT, id, name);
+  }
 }

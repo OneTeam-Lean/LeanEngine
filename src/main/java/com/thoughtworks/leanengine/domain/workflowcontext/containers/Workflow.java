@@ -7,11 +7,9 @@ import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Container;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class Workflow extends Container {
   private String workflowId;
   private List<Lane> lanes;

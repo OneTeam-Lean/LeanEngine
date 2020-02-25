@@ -1,110 +1,49 @@
 package com.thoughtworks.leanengine.adapter;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.thoughtworks.leanengine.ApiTestBase;
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Edge;
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Position;
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Shape;
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Size;
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Status;
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
-import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
 import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;
 import io.restassured.http.ContentType;
-import java.time.LocalDateTime;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class WorkflowControllerTest extends ApiTestBase {
 
-  @Autowired private WorkflowRepository workflowRepository;
+  @Autowired private WorkflowRepository repo;
 
-  @Test
-  void return_workflow_json_when_GET_workflow_api() {
-    WorkflowPO workflowPO = new WorkflowPO();
-    workflowPO.setComponents(
-        newArrayList(
-            new AutoTask(
-                "taskId", "taskName", Status.PENDING, LocalDateTime.now(), LocalDateTime.now())));
-    workflowPO.setName("apiTestSave");
-    workflowPO.setDiagrams(
-        newArrayList(
-            Shape.of("componentId", Size.of(10, 20), Position.of(30, 40)),
-            Edge.of("flowId", Position.of(100, 200), Position.of(300, 400))));
-    workflowPO.setLanes(newArrayList(new Lane("testLane", "laneId", newArrayList())));
-    workflowRepository.save(workflowPO);
-    when().get("/workflow/apiTestSave").then().statusCode(200).log().all();
-    workflowRepository.deleteByName("apiTestSave");
+  @AfterEach
+  public void cleanDB() {
+    repo.findAll()
+        .stream()
+        .filter(po -> po.getName().toLowerCase().contains("test"))
+        .forEach(po -> repo.deleteByName(po.getName()));
   }
 
   @Test
-  void return_workflow_in_mongo_when_POST_workflow() {
+  void return_workflow_json_when_GET_workflow_api() {
+    WorkflowPO workflowPO = buildWorkflowPO("apiTestSave");
+    repo.save(workflowPO);
+    when().get("/workflow/apiTestSave").then().statusCode(200).log().all();
+  }
+
+  @Test
+  void return_workflow_in_mongo_when_POST_workflow() throws JsonProcessingException {
     given()
         .contentType(ContentType.JSON)
-        .body(
-            "{\n"
-                + "    \"type\": \"workflow\",\n"
-                + "    \"componentType\": \"WORKFLOW\",\n"
-                + "    \"name\": \"postWorkflow\",\n"
-                + "    \"workflowId\": \"5e54e96a2aeb0130840fb087\",\n"
-                + "    \"lanes\": [\n"
-                + "        {\n"
-                + "            \"type\": \"lane\",\n"
-                + "            \"componentType\": \"LANE\",\n"
-                + "            \"name\": \"testLane\",\n"
-                + "            \"laneId\": \"laneId\",\n"
-                + "            \"componentIds\": [\n"
-                + "                \n"
-                + "            ]\n"
-                + "        }\n"
-                + "    ],\n"
-                + "    \"components\": [\n"
-                + "        {\n"
-                + "            \"type\": \"autoTask\",\n"
-                + "            \"componentType\": \"AUTO_TASK\"\n"
-                + "        }\n"
-                + "    ],\n"
-                + "    \"diagrams\": [\n"
-                + "        {\n"
-                + "            \"type\": \"shape\",\n"
-                + "            \"diagramType\": \"SHAPE\",\n"
-                + "            \"componentId\": \"componentId\",\n"
-                + "            \"size\": {\n"
-                + "                \"width\": 10,\n"
-                + "                \"height\": 20\n"
-                + "            },\n"
-                + "            \"position\": {\n"
-                + "                \"position_x\": 30,\n"
-                + "                \"position_y\": 40\n"
-                + "            }\n"
-                + "        },\n"
-                + "        {\n"
-                + "            \"type\": \"edge\",\n"
-                + "            \"diagramType\": \"EDGE\",\n"
-                + "            \"flowId\": \"flowId\",\n"
-                + "            \"startPosition\": {\n"
-                + "                \"position_x\": 100,\n"
-                + "                \"position_y\": 200\n"
-                + "            },\n"
-                + "            \"endPosition\": {\n"
-                + "                \"position_x\": 300,\n"
-                + "                \"position_y\": 400\n"
-                + "            }\n"
-                + "        }\n"
-                + "    ]\n"
-                + "}")
+        .body(getWorkflowJson("postTest"))
         .post("/workflow")
         .then()
         .statusCode(200)
         .log()
         .all();
-    WorkflowPO workflowPO = workflowRepository.findByName("postWorkflow");
+    WorkflowPO workflowPO = repo.findByName("postTest");
     assertNotNull(workflowPO);
-    workflowRepository.deleteByName("postWorkflow");
+    repo.deleteByName("postTest");
   }
 }

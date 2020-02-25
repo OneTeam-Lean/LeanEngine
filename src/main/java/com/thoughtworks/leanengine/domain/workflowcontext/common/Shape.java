@@ -2,10 +2,8 @@ package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.DiagramType;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
-@ToString
 public class Shape extends Diagram {
   private String componentId;
   private Size size;
