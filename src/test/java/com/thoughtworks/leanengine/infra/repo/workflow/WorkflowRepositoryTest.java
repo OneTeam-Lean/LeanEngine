@@ -79,7 +79,7 @@ public class WorkflowRepositoryTest extends ApiTestBase {
     workflowPO.setLanes(newArrayList(new Lane("testLane", "laneId", newArrayList())));
     repo.save(workflowPO);
     WorkflowPO testFind = repo.findByName("testFind");
-    assertEquals(testFind, workflowPO);
+    assertEquals(testFind.toString(), workflowPO.toString());
     repo.deleteByName("testFind");
   }
 
@@ -105,6 +105,6 @@ public class WorkflowRepositoryTest extends ApiTestBase {
     assertNotNull(updateTest);
     assertEquals(updateTest.getName(), "updateTest");
     updateTest.setName("testFind");
-    assertEquals(updateTest, workflowPO);
+    assertEquals(updateTest.toString(), workflowPO.toString());
   }
 }

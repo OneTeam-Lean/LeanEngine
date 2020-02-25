@@ -1,9 +1,21 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
-import lombok.Data;
+import java.io.Serializable;
+import lombok.Getter;
 
-@Data(staticConstructor = "of")
-public class Size {
-  private final int width;
-  private final int height;
+@Getter
+public class Size implements Serializable {
+  private int width;
+  private int height;
+
+  public Size() {}
+
+  public Size(int width, int height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  public static Size of(int w, int h) {
+    return new Size(w, h);
+  }
 }

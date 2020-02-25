@@ -1,3 +1,10 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
 
-public abstract class Gateway implements Component {}
+import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
+
+public abstract class Gateway extends Component {
+
+  public Gateway(ComponentType componentType) {
+    super(componentType);
+  }
+}

@@ -1,7 +1,9 @@
 package com.thoughtworks.leanengine.adapter;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.thoughtworks.leanengine.ApiTestBase;
 import com.thoughtworks.leanengine.domain.workflowcontext.common.Edge;
@@ -13,6 +15,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
 import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;
+import io.restassured.http.ContentType;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,73 @@ public class WorkflowControllerTest extends ApiTestBase {
             Edge.of("flowId", Position.of(100, 200), Position.of(300, 400))));
     workflowPO.setLanes(newArrayList(new Lane("testLane", "laneId", newArrayList())));
     workflowRepository.save(workflowPO);
-    when().get("/workflow/apiTestSave").then().statusCode(200).log().body();
+    when().get("/workflow/apiTestSave").then().statusCode(200).log().all();
     workflowRepository.deleteByName("apiTestSave");
+  }
+
+  @Test
+  void return_workflow_in_mongo_when_POST_workflow() {
+    given()
+        .contentType(ContentType.JSON)
+        .body(
+            "{\n"
+                + "    \"type\": \"workflow\",\n"
+                + "    \"componentType\": \"WORKFLOW\",\n"
+                + "    \"name\": \"postWorkflow\",\n"
+                + "    \"workflowId\": \"5e54e96a2aeb0130840fb087\",\n"
+                + "    \"lanes\": [\n"
+                + "        {\n"
+                + "            \"type\": \"lane\",\n"
+                + "            \"componentType\": \"LANE\",\n"
+                + "            \"name\": \"testLane\",\n"
+                + "            \"laneId\": \"laneId\",\n"
+                + "            \"componentIds\": [\n"
+                + "                \n"
+                + "            ]\n"
+                + "        }\n"
+                + "    ],\n"
+                + "    \"components\": [\n"
+                + "        {\n"
+                + "            \"type\": \"autoTask\",\n"
+                + "            \"componentType\": \"AUTO_TASK\"\n"
+                + "        }\n"
+                + "    ],\n"
+                + "    \"diagrams\": [\n"
+                + "        {\n"
+                + "            \"type\": \"shape\",\n"
+                + "            \"diagramType\": \"SHAPE\",\n"
+                + "            \"componentId\": \"componentId\",\n"
+                + "            \"size\": {\n"
+                + "                \"width\": 10,\n"
+                + "                \"height\": 20\n"
+                + "            },\n"
+                + "            \"position\": {\n"
+                + "                \"position_x\": 30,\n"
+                + "                \"position_y\": 40\n"
+                + "            }\n"
+                + "        },\n"
+                + "        {\n"
+                + "            \"type\": \"edge\",\n"
+                + "            \"diagramType\": \"EDGE\",\n"
+                + "            \"flowId\": \"flowId\",\n"
+                + "            \"startPosition\": {\n"
+                + "                \"position_x\": 100,\n"
+                + "                \"position_y\": 200\n"
+                + "            },\n"
+                + "            \"endPosition\": {\n"
+                + "                \"position_x\": 300,\n"
+                + "                \"position_y\": 400\n"
+                + "            }\n"
+                + "        }\n"
+                + "    ]\n"
+                + "}")
+        .post("/workflow")
+        .then()
+        .statusCode(200)
+        .log()
+        .all();
+    WorkflowPO workflowPO = workflowRepository.findByName("postWorkflow");
+    assertNotNull(workflowPO);
+    workflowRepository.deleteByName("postWorkflow");
   }
 }

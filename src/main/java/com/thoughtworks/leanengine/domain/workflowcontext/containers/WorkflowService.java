@@ -12,7 +12,9 @@ public class WorkflowService {
     this.workflowRepository = workflowRepository;
   }
 
-  public void saveWorkflow(Workflow workflow) {}
+  public void saveWorkflow(Workflow workflow) {
+    workflowRepository.save(WorkflowPO.of(workflow));
+  }
 
   public Workflow queryWorkflowByName(String name) {
     WorkflowPO workflowPO = workflowRepository.findByName(name);

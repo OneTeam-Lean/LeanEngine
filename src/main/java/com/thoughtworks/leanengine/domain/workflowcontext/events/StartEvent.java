@@ -1,7 +1,11 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.events;
 
+import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Event;
-import lombok.Data;
 
-@Data
-public class StartEvent extends Event {}
+public class StartEvent extends Event {
+
+  public StartEvent() {
+    super(ComponentType.START_EVENT);
+  }
+}

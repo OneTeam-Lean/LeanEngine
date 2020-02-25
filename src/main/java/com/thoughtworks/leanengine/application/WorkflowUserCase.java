@@ -15,4 +15,8 @@ public class WorkflowUserCase {
   public Workflow getWorkflowByName(String name) {
     return workflowService.queryWorkflowByName(name);
   }
+
+  public void saveWorkflow(Workflow workflow) {
+    workflowService.saveWorkflow(workflow);
+  }
 }

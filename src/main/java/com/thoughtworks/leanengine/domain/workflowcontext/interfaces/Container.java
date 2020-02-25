@@ -1,12 +1,20 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
 
-import lombok.Data;
+import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public abstract class Container implements Component {
+@Getter
+@Setter
+public abstract class Container extends Component {
   private String name;
 
-  public Container(String name) {
+  public Container(ComponentType componentType) {
+    super(componentType);
+  }
+
+  public Container(ComponentType componentType, String name) {
+    super(componentType);
     this.name = name;
   }
 }

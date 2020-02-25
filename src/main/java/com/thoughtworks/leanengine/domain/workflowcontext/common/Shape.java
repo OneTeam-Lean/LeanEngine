@@ -1,10 +1,28 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
-import lombok.Data;
+import com.thoughtworks.leanengine.domain.workflowcontext.enums.DiagramType;
+import lombok.Getter;
+import lombok.ToString;
 
-@Data(staticConstructor = "of")
-public class Shape implements Diagram {
-  private final String componentId;
-  private final Size size;
-  private final Position position;
+@Getter
+@ToString
+public class Shape extends Diagram {
+  private String componentId;
+  private Size size;
+  private Position position;
+
+  public Shape() {
+    super(DiagramType.SHAPE);
+  }
+
+  public Shape(String componentId, Size size, Position position) {
+    super(DiagramType.SHAPE);
+    this.componentId = componentId;
+    this.size = size;
+    this.position = position;
+  }
+
+  public static Shape of(String componentId, Size size, Position position) {
+    return new Shape(componentId, size, position);
+  }
 }
