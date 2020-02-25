@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.configure;
+package com.thoughtworks.leanengine.infra.conf;
 
 import static io.restassured.RestAssured.when;
 

@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.configure;
+package com.thoughtworks.leanengine.infra.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
