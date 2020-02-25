@@ -9,4 +9,8 @@ public abstract class Activity implements Component {
   private Status status;
   private LocalDateTime startTime;
   private LocalDateTime endTime;
+
+  public void before() {}
+
+  public void done() {}
 }
