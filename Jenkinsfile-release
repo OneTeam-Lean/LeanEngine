@@ -6,25 +6,12 @@ pipeline {
          steps {
             git 'https://github.com/OneTeam-Lean/LeanEngine.git'
 
-            sh "./go image ${ENV_NAME}.${BUILD_NUMBER} ${HARBOR_PASSWORD} "
+            sh "./go image ${BUILD_NUMBER} ${HARBOR_PASSWORD} "
          }
 
          post {
-             always{
-               junit 'build/test-results/**/*.xml'
-               publishHTML (target: [
-                             allowMissing: false,
-                             alwaysLinkToLastBuild: false,
-                             keepAll: true,
-                             reportDir: 'build/reports/tests/test',
-                             reportFiles: 'index.html',
-                             reportName: "Tests"
-               ])
-             }
-            // If Maven was able to run the tests, even if some of the test
-            // failed, record the test results and archive the jar file.
             success {
-               echo "- done -"
+               echo "- Docker image build successfully and pushed to docker registry. -"
             }
          }
       }
