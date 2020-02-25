@@ -2,8 +2,10 @@ package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
 import java.io.Serializable;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class Size implements Serializable {
   private int width;
   private int height;
