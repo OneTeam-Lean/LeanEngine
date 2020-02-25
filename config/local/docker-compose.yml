@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.7'
 services:
   db:
     image: mysql:5.7
@@ -18,13 +18,16 @@ services:
       - "MYSQL_ROOT_PASSWORD="
     ports:
       - "3306:3306"
-  mongo:
-    image: mongo
-    restart: always
+  mongodb_container:
+    image: mongo:latest
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
-
+      MONGO_INITDB_DATABASE: leanengine
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 #  redis:
 #    image: redis:4.0.11
 #    command: redis-server --appendonly no

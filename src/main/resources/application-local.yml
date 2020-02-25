@@ -8,6 +8,11 @@ spring:
       ddl-auto: update
   flyway:
     enabled: true
+  data:
+    mongodb:
+      database: leanengine
+      username: root
+      password: root
 management:
   endpoints:
     enabled-by-default: false

@@ -1,8 +1,8 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.containers;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Edge;
+import com.thoughtworks.leanengine.domain.workflowcontext.common.Diagram;
+import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Container;
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Flow;
 import java.util.List;
 import lombok.Getter;
 
@@ -10,10 +10,11 @@ import lombok.Getter;
 public class Workflow extends Container {
   private String workflowId;
   private List<Lane> lanes;
-  private List<Flow> laneFlow;
-  private List<Edge> laneFlowEdge;
+  private List<Component> laneFlow;
+  private List<Diagram> laneFlowEdge;
 
-  public Workflow(String name, List<Lane> lanes, List<Flow> laneFlow, List<Edge> laneFlowEdge) {
+  public Workflow(
+      String name, List<Lane> lanes, List<Component> laneFlow, List<Diagram> laneFlowEdge) {
     super(name);
     this.lanes = lanes;
     this.laneFlow = laneFlow;

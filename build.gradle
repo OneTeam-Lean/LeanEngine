@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.google.guava:guava:28.2-jre'
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     annotationProcessor(
             "org.projectlombok:lombok:${lombokVersion}",
     )
