@@ -40,8 +40,9 @@ case "$1" in
     ;;
   "image")
     ./gradlew clean build
-    sudo docker build --rm -t ${app_image_fullname} .
-    sudo docker push ${app_image_fullname}
+    docker build --rm -t ${app_image_fullname} .
+    docker login -u admin -p $3 $docker_registry
+    docker push ${app_image_fullname}
     exit 0
     ;;
   "migration")
