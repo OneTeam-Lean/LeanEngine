@@ -12,7 +12,7 @@ public class WorkflowService {
 
   public Workflow queryWorkflowByName(String name) {
     List<Lane> lanes = newArrayList();
-    lanes.add(new Lane("testLane", newArrayList()));
-    return new Workflow(name, lanes, newArrayList(), newArrayList());
+    lanes.add(new Lane("testLane", null, newArrayList()));
+    return new Workflow(null, name, lanes, newArrayList(), newArrayList());
   }
 }

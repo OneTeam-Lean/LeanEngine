@@ -17,7 +17,7 @@ class WorkflowServiceTest extends Specification {
 
     def 'should add workflow success'() {
         given:
-        Workflow workflow = new Workflow("testWorkflow", newArrayList(), newArrayList(), newArrayList())
+        Workflow workflow = new Workflow(null,"testWorkflow", newArrayList(), newArrayList(), newArrayList())
         when:
         workflowService.saveWorkflow(workflow)
         then:

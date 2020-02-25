@@ -6,10 +6,12 @@ import lombok.Getter;
 
 @Getter
 public class Lane extends Container {
-  List<String> ComponentIds;
+  private String laneId;
+  private List<String> ComponentIds;
 
-  public Lane(String name, List<String> componentIds) {
+  public Lane(String name, String laneId, List<String> componentIds) {
     super(name);
+    this.laneId = laneId;
     ComponentIds = componentIds;
   }
 }

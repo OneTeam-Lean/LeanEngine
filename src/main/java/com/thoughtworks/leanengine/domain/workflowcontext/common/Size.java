@@ -1,11 +1,9 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
+@Data(staticConstructor = "of")
 public class Size {
-  private int width;
-  private int height;
+  private final int width;
+  private final int height;
 }

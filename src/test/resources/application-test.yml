@@ -1,3 +1,10 @@
 spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  data:
+    mongodb:
+      database: leanengine
+      username: sa
+      password: sa
+      host: localhost
+      port: 27017

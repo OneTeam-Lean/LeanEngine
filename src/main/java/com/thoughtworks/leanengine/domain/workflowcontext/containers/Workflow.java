@@ -10,14 +10,19 @@ import lombok.Getter;
 public class Workflow extends Container {
   private String workflowId;
   private List<Lane> lanes;
-  private List<Component> laneFlow;
-  private List<Diagram> laneFlowEdge;
+  private List<Component> components;
+  private List<Diagram> diagrams;
 
   public Workflow(
-      String name, List<Lane> lanes, List<Component> laneFlow, List<Diagram> laneFlowEdge) {
+      String name,
+      String workflowId,
+      List<Lane> lanes,
+      List<Component> components,
+      List<Diagram> diagrams) {
     super(name);
+    this.workflowId = workflowId;
     this.lanes = lanes;
-    this.laneFlow = laneFlow;
-    this.laneFlowEdge = laneFlowEdge;
+    this.components = components;
+    this.diagrams = diagrams;
   }
 }

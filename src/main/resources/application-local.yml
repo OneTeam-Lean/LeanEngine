@@ -11,8 +11,10 @@ spring:
   data:
     mongodb:
       database: leanengine
-      username: root
-      password: root
+      username: sa
+      password: sa
+      host: localhost
+      port: 27017
 management:
   endpoints:
     enabled-by-default: false

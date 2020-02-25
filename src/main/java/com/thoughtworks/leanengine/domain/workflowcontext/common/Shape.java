@@ -1,12 +1,10 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.common;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
-@Data
+@Data(staticConstructor = "of")
 public class Shape implements Diagram {
-  private String componentId;
-  private Size size;
-  private Position position;
+  private final String componentId;
+  private final Size size;
+  private final Position position;
 }
