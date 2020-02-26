@@ -15,7 +15,7 @@
 - [https://github.com/OneTeam-Lean/LeanEngine.git](https://github.com/OneTeam-Lean/LeanEngine.git)
 - [CI](http://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9000/), UserName: admin
 - [Harbor](http://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9001/), UserName: admin
-- [MongoDB], Host, ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn, 端口, 9002, UserName: admin
+- [MongoDB], Host, ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn, 端口, 9002, UserName1: admin, UserName2: test
 - [Web](http://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9003/)
 
 ## 代码提交规范
