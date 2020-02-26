@@ -5,6 +5,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
+import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Edge;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Position;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Shape;
@@ -94,6 +95,8 @@ public class ApiTestBase {
   }
 
   protected String getWorkflowJson(String workflowName) throws JsonProcessingException {
-    return objectMapper.writeValueAsString(buildWorkflowPO(workflowName));
+    Workflow workflow = new Workflow();
+    workflow.setName(workflowName);
+    return objectMapper.writeValueAsString(workflow);
   }
 }

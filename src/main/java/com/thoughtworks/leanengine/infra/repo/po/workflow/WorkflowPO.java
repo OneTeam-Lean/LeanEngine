@@ -19,11 +19,11 @@ import org.springframework.util.StringUtils;
 @Data
 public class WorkflowPO implements PersistenceObject<Workflow> {
   @Id private String workflowId;
-
-  @Indexed(unique = true)
   private ComponentType componentType;
 
+  @Indexed(unique = true)
   private String name;
+
   private List<Lane> lanes;
   private List<Component> components;
   private List<Diagram> diagrams;

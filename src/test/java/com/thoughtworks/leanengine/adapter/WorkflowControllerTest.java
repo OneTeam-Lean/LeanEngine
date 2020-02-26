@@ -46,4 +46,26 @@ public class WorkflowControllerTest extends ApiTestBase {
     assertNotNull(workflowPO);
     repo.deleteByName("postTest");
   }
+
+  @Test
+  void return_autoTask_name_testTask_when_PUT_workflow() throws JsonProcessingException {
+    WorkflowPO workflowPO = new WorkflowPO();
+    workflowPO.setName("putTest");
+    WorkflowPO save = repo.save(workflowPO);
+    WorkflowPO putTest = buildWorkflowPO("putTest");
+    putTest.setWorkflowId(save.getWorkflowId());
+    given()
+        .contentType(ContentType.JSON)
+        .body(objectMapper.writeValueAsString(putTest))
+        .put("/workflow")
+        .then()
+        .statusCode(200)
+        .log()
+        .all();
+    WorkflowPO updatedPO = repo.findByName("putTest");
+    assertNotNull(updatedPO.getWorkflowId());
+    assertNotNull(updatedPO.getComponents());
+    assertNotNull(updatedPO.getDiagrams());
+    assertNotNull(updatedPO.getLanes());
+  }
 }
