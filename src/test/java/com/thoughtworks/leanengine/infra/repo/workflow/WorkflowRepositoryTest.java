@@ -8,21 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.thoughtworks.leanengine.ApiTestBase;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class WorkflowRepositoryTest extends ApiTestBase {
-
-  @Autowired private WorkflowRepository repo;
-
-  @AfterEach
-  public void cleanDB() {
-    repo.findAll()
-        .stream()
-        .filter(po -> po.getName().toLowerCase().contains("test"))
-        .forEach(po -> repo.deleteByName(po.getName()));
-  }
 
   @Test
   void should_return_1_when_save_workflowPO() {
@@ -31,7 +19,6 @@ public class WorkflowRepositoryTest extends ApiTestBase {
     WorkflowPO example = new WorkflowPO();
     example.setName("testSave");
     assertEquals(1, repo.findAll().stream().filter(po -> po.getName().equals("testSave")).count());
-    repo.deleteByName("testSave");
   }
 
   @Test
@@ -51,7 +38,6 @@ public class WorkflowRepositoryTest extends ApiTestBase {
     WorkflowPO testFind = repo.findByName("testFind");
     assertEquals(
         objectMapper.writeValueAsString(testFind), objectMapper.writeValueAsString(workflowPO));
-    repo.deleteByName("testFind");
   }
 
   @Test

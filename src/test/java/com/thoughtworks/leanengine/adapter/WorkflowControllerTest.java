@@ -9,21 +9,12 @@ import com.thoughtworks.leanengine.ApiTestBase;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
 import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class WorkflowControllerTest extends ApiTestBase {
 
   @Autowired private WorkflowRepository repo;
-
-  @AfterEach
-  public void cleanDB() {
-    repo.findAll()
-        .stream()
-        .filter(po -> po.getName().toLowerCase().contains("test"))
-        .forEach(po -> repo.deleteByName(po.getName()));
-  }
 
   @Test
   void return_workflow_json_when_GET_workflow_api() {
@@ -44,7 +35,6 @@ public class WorkflowControllerTest extends ApiTestBase {
         .all();
     WorkflowPO workflowPO = repo.findByName("postTest");
     assertNotNull(workflowPO);
-    repo.deleteByName("postTest");
   }
 
   @Test

@@ -17,11 +17,13 @@ import com.thoughtworks.leanengine.domain.workflowcontext.flows.SequenceFlow;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.ManualTask;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
+import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
 import java.time.LocalDateTime;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +37,7 @@ public class ApiTestBase {
   @LocalServerPort private int port;
 
   @Autowired protected ObjectMapper objectMapper;
+  @Autowired protected WorkflowRepository repo;
 
   @BeforeEach
   void setUp() {
@@ -48,6 +51,11 @@ public class ApiTestBase {
             .objectMapperConfig(
                 new ObjectMapperConfig()
                     .jackson2ObjectMapperFactory((cls, charset) -> objectMapper));
+  }
+
+  @AfterEach
+  void cleanUp() {
+    repo.deleteAll();
   }
 
   protected WorkflowPO buildWorkflowPO(String name) {
