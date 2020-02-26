@@ -11,9 +11,11 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/simulator")
 @AllArgsConstructor
 public class SimulatorController {
   private WorkflowRepository workflowRepository;

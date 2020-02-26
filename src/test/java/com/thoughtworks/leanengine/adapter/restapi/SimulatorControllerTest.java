@@ -21,7 +21,7 @@ class SimulatorControllerTest extends ApiTestBase {
   public void shouldModifyComponentsStatus() {
     WorkflowPO workflowPO = buildWorkflowPO("statusTest");
     repo.save(workflowPO);
-    when().put("/statusTest/manualTaskId/SUCCESS").then().statusCode(200);
+    when().put("/simulator/statusTest/manualTaskId/SUCCESS").then().statusCode(200);
     WorkflowPO updatedWorkflowPO = repo.findByName("statusTest");
     List<Component> components = updatedWorkflowPO.getComponents();
     components
