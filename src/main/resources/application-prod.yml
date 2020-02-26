@@ -3,8 +3,9 @@ spring:
     mongodb:
       username: admin
       password: tw2020
-      uri: mongodb://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9002
-      database: admin
+      authentication-database: admin
+      host: ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn
+      port: 9002
 management:
   endpoints:
     enabled-by-default: false
