@@ -19,10 +19,10 @@ class SimulatorControllerTest extends ApiTestBase {
 
   @Test
   public void shouldModifyComponentsStatus() {
-    WorkflowPO workflowPO = buildWorkflowPO("apiTestSave");
+    WorkflowPO workflowPO = buildWorkflowPO("statusTest");
     repo.save(workflowPO);
-    when().put("/apiTestSave/manualTaskId/SUCCESS").then().statusCode(200);
-    WorkflowPO updatedWorkflowPO = repo.findByName("apiTestSave");
+    when().put("/statusTest/manualTaskId/SUCCESS").then().statusCode(200);
+    WorkflowPO updatedWorkflowPO = repo.findByName("statusTest");
     List<Component> components = updatedWorkflowPO.getComponents();
     components
         .stream()
@@ -33,5 +33,6 @@ class SimulatorControllerTest extends ApiTestBase {
                 assertEquals(manualTask.getStatus(), Status.SUCCESS);
               }
             });
+    repo.deleteByName("statusTest");
   }
 }
