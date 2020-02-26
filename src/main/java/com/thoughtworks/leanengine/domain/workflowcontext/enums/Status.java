@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.common;
+package com.thoughtworks.leanengine.domain.workflowcontext.enums;
 
 public enum Status {
   SUCCESS,

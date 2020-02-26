@@ -1,7 +1,7 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.tasks;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
+import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
 import java.time.LocalDateTime;
 
