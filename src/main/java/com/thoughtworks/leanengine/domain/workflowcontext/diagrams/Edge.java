@@ -6,21 +6,21 @@ import lombok.Getter;
 @Getter
 public class Edge extends Diagram {
   private String flowId;
-  private Position startPosition;
-  private Position endPosition;
+  private int sourceAnchor;
+  private int targetAnchor;
 
   public Edge() {
     super(DiagramType.EDGE);
   }
 
-  private Edge(String flowId, Position startPosition, Position endPosition) {
+  public Edge(String flowId, int sourceAnchor, int targetAnchor) {
     super(DiagramType.EDGE);
     this.flowId = flowId;
-    this.startPosition = startPosition;
-    this.endPosition = endPosition;
+    this.sourceAnchor = sourceAnchor;
+    this.targetAnchor = targetAnchor;
   }
 
-  public static Edge of(String flowId, Position startPosition, Position endPosition) {
-    return new Edge(flowId, startPosition, endPosition);
+  public static Edge of(String flowId, int sourceAnchor, int targetAnchor) {
+    return new Edge(flowId, sourceAnchor, targetAnchor);
   }
 }

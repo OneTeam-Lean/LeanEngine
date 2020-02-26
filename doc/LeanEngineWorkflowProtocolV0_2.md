@@ -89,159 +89,159 @@
 
 ``` json
 {
-    "componentType": "WORKFLOW",
-    "name": "apiTestSave",
-    "workflowId": "5e55e3868fea0e1bd82e3096",
-    "lanes": [
-        {
-            "componentType": "LANE",
-            "name": "testLane",
-            "laneId": "laneId",
-            "componentIds": [
-                "startEventId",
-                "sequenceFlowId_1",
-                "autoTaskId",
-                "sequenceFlowId_2",
-                "manualTaskId",
-                "sequenceFlowId_3",
-                "endEventId"
-            ]
-        }
-    ],
-    "components": [
-        {
-            "componentType": "START_EVENT",
-            "id": "startEventId",
-            "name": "startEvent"
-        },
-        {
-            "componentType": "SEQUENCE_FLOW",
-            "flowId": "sequenceFlowId_1",
-            "fromComponentId": "startEventId",
-            "toComponentId": "autoTaskId"
-        },
-        {
-            "componentType": "AUTO_TASK"
-        },
-        {
-            "componentType": "SEQUENCE_FLOW",
-            "flowId": "sequenceFlowId_2",
-            "fromComponentId": "autoTaskId",
-            "toComponentId": "manualTaskId"
-        },
-        {
-            "componentType": "MANUAL_TASK"
-        },
-        {
-            "componentType": "SEQUENCE_FLOW",
-            "flowId": "sequenceFlowId_3",
-            "fromComponentId": "manualTaskId",
-            "toComponentId": "endEventId"
-        },
-        {
-            "componentType": "END_EVENT",
-            "id": "endEventId",
-            "name": "endEvent"
-        }
-    ],
-    "diagrams": [
-        {
-            "diagramType": "SHAPE",
-            "componentId": "startEventId",
-            "size": {
-                "width": 5,
-                "height": 10
-            },
-            "position": {
-                "position_x": 30,
-                "position_y": 40
-            }
-        },
-        {
-            "diagramType": "EDGE",
-            "flowId": "sequenceFlowId_1",
-            "startPosition": {
-                "position_x": 100,
-                "position_y": 200
-            },
-            "endPosition": {
-                "position_x": 300,
-                "position_y": 400
-            }
-        },
-        {
-            "diagramType": "SHAPE",
-            "componentId": "autoTaskId",
-            "size": {
-                "width": 10,
-                "height": 20
-            },
-            "position": {
-                "position_x": 30,
-                "position_y": 40
-            }
-        },
-        {
-            "diagramType": "EDGE",
-            "flowId": "sequenceFlowId_2",
-            "startPosition": {
-                "position_x": 100,
-                "position_y": 200
-            },
-            "endPosition": {
-                "position_x": 300,
-                "position_y": 400
-            }
-        },
-        {
-            "diagramType": "SHAPE",
-            "componentId": "autoTaskId",
-            "size": {
-                "width": 10,
-                "height": 20
-            },
-            "position": {
-                "position_x": 30,
-                "position_y": 40
-            }
-        },
-        {
-            "diagramType": "EDGE",
-            "flowId": "sequenceFlowId_3",
-            "startPosition": {
-                "position_x": 100,
-                "position_y": 200
-            },
-            "endPosition": {
-                "position_x": 300,
-                "position_y": 400
-            }
-        },
-        {
-            "diagramType": "SHAPE",
-            "componentId": "manualTaskId",
-            "size": {
-                "width": 10,
-                "height": 20
-            },
-            "position": {
-                "position_x": 30,
-                "position_y": 40
-            }
-        },
-        {
-            "diagramType": "SHAPE",
-            "componentId": "endEventId",
-            "size": {
-                "width": 5,
-                "height": 10
-            },
-            "position": {
-                "position_x": 30,
-                "position_y": 40
-            }
-        }
-    ]
+  "componentType": "WORKFLOW",
+  "components": [
+    {
+      "componentType": "START_EVENT",
+      "id": "startEventId",
+      "name": "startEvent",
+      "task": false
+    },
+    {
+      "componentType": "SEQUENCE_FLOW",
+      "flowId": "sequenceFlowId_1",
+      "fromComponentId": "startEventId",
+      "task": false,
+      "toComponentId": "autoTaskId"
+    },
+    {
+      "componentType": "AUTO_TASK",
+      "endTime": "2020-02-26T14:28:29.315",
+      "id": "autoTaskId",
+      "name": "taskName",
+      "startTime": "2020-02-26T14:28:29.315",
+      "status": "PENDING",
+      "task": true
+    },
+    {
+      "componentType": "SEQUENCE_FLOW",
+      "flowId": "sequenceFlowId_2",
+      "fromComponentId": "autoTaskId",
+      "task": false,
+      "toComponentId": "manualTaskId"
+    },
+    {
+      "componentType": "MANUAL_TASK",
+      "endTime": "2020-02-26T14:28:29.315",
+      "id": "manualTaskId",
+      "name": "manualTaskName",
+      "startTime": "2020-02-26T14:28:29.315",
+      "status": "PENDING",
+      "task": true
+    },
+    {
+      "componentType": "SEQUENCE_FLOW",
+      "flowId": "sequenceFlowId_3",
+      "fromComponentId": "manualTaskId",
+      "task": false,
+      "toComponentId": "endEventId"
+    },
+    {
+      "componentType": "END_EVENT",
+      "id": "endEventId",
+      "name": "endEvent",
+      "task": false
+    }
+  ],
+  "diagrams": [
+    {
+      "componentId": "startEventId",
+      "diagramType": "SHAPE",
+      "position": {
+        "position_x": 30,
+        "position_y": 40
+      },
+      "size": {
+        "height": 10,
+        "width": 5
+      }
+    },
+    {
+      "diagramType": "EDGE",
+      "flowId": "sequenceFlowId_1",
+      "sourceAnchor": 1,
+      "targetAnchor": 2
+    },
+    {
+      "componentId": "autoTaskId",
+      "diagramType": "SHAPE",
+      "position": {
+        "position_x": 30,
+        "position_y": 40
+      },
+      "size": {
+        "height": 20,
+        "width": 10
+      }
+    },
+    {
+      "diagramType": "EDGE",
+      "flowId": "sequenceFlowId_2",
+      "sourceAnchor": 1,
+      "targetAnchor": 3
+    },
+    {
+      "componentId": "autoTaskId",
+      "diagramType": "SHAPE",
+      "position": {
+        "position_x": 30,
+        "position_y": 40
+      },
+      "size": {
+        "height": 20,
+        "width": 10
+      }
+    },
+    {
+      "diagramType": "EDGE",
+      "flowId": "sequenceFlowId_3",
+      "sourceAnchor": 4,
+      "targetAnchor": 1
+    },
+    {
+      "componentId": "manualTaskId",
+      "diagramType": "SHAPE",
+      "position": {
+        "position_x": 30,
+        "position_y": 40
+      },
+      "size": {
+        "height": 20,
+        "width": 10
+      }
+    },
+    {
+      "componentId": "endEventId",
+      "diagramType": "SHAPE",
+      "position": {
+        "position_x": 30,
+        "position_y": 40
+      },
+      "size": {
+        "height": 10,
+        "width": 5
+      }
+    }
+  ],
+  "lanes": [
+    {
+      "componentIds": [
+        "startEventId",
+        "sequenceFlowId_1",
+        "autoTaskId",
+        "sequenceFlowId_2",
+        "manualTaskId",
+        "sequenceFlowId_3",
+        "endEventId"
+      ],
+      "componentType": "LANE",
+      "laneId": "laneId",
+      "name": "testLane",
+      "task": false
+    }
+  ],
+  "name": "workflowName",
+  "workflowId": null
 }
 ```
 

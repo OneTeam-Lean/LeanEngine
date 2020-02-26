@@ -25,6 +25,7 @@ import io.restassured.config.RestAssuredConfig;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -79,11 +80,11 @@ public class ApiTestBase {
     workflowPO.setDiagrams(
         newArrayList(
             Shape.of("startEventId", Size.of(5, 10), Position.of(30, 40)),
-            Edge.of("sequenceFlowId_1", Position.of(100, 200), Position.of(300, 400)),
+            Edge.of("sequenceFlowId_1", 1, 2),
             Shape.of("autoTaskId", Size.of(10, 20), Position.of(30, 40)),
-            Edge.of("sequenceFlowId_2", Position.of(100, 200), Position.of(300, 400)),
+            Edge.of("sequenceFlowId_2", 1, 3),
             Shape.of("autoTaskId", Size.of(10, 20), Position.of(30, 40)),
-            Edge.of("sequenceFlowId_3", Position.of(100, 200), Position.of(300, 400)),
+            Edge.of("sequenceFlowId_3", 4, 1),
             Shape.of("manualTaskId", Size.of(10, 20), Position.of(30, 40)),
             Shape.of("endEventId", Size.of(5, 10), Position.of(30, 40))));
     workflowPO.setLanes(
@@ -106,5 +107,11 @@ public class ApiTestBase {
     Workflow workflow = new Workflow();
     workflow.setName(workflowName);
     return objectMapper.writeValueAsString(workflow);
+  }
+
+  @Test
+  void print_full_dsl_json() throws JsonProcessingException {
+    String json = objectMapper.writeValueAsString(buildWorkflowPO("workflowName"));
+    System.out.println(json);
   }
 }
