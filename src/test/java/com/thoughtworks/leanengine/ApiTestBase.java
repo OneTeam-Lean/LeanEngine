@@ -54,7 +54,7 @@ public class ApiTestBase {
     workflowPO.setComponents(
         newArrayList(
             new StartEvent("startEventId", "startEvent"),
-            new SequenceFlow("sequenceFlowId_1", "autoTaskId", "manualTaskId"),
+            new SequenceFlow("sequenceFlowId_1", "startEventId", "autoTaskId"),
             new AutoTask(
                 "autoTaskId", "taskName", Status.PENDING, LocalDateTime.now(), LocalDateTime.now()),
             new SequenceFlow("sequenceFlowId_2", "autoTaskId", "manualTaskId"),
@@ -64,7 +64,7 @@ public class ApiTestBase {
                 Status.PENDING,
                 LocalDateTime.now(),
                 LocalDateTime.now()),
-            new SequenceFlow("sequenceFlowId_3", "autoTaskId", "manualTaskId"),
+            new SequenceFlow("sequenceFlowId_3", "manualTaskId", "endEventId"),
             new EndEvent("endEventId", "endEvent")));
     workflowPO.setName(name);
     workflowPO.setDiagrams(
@@ -83,13 +83,13 @@ public class ApiTestBase {
                 "testLane",
                 "laneId",
                 newArrayList(
-                    "startEvent",
+                    "startEventId",
                     "sequenceFlowId_1",
                     "autoTaskId",
                     "sequenceFlowId_2",
-                    "manualTask",
+                    "manualTaskId",
                     "sequenceFlowId_3",
-                    "endEvent"))));
+                    "endEventId"))));
     return workflowPO;
   }
 

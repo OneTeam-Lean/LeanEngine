@@ -1,4 +1,4 @@
-# LeanEngine 工作流协议 0.2
+# LeanEngine 工作流协议 0.4
 本协议基于 BPMN2.0 协议中的规定，并根据需求新增了部分定义。
 
 ## 与 BPMN2.0 协议的名词对照
@@ -23,16 +23,16 @@
 ### Workflow ( `Container` )
 
 1. Workflow 是为了将达到某些目标的一系列活动和任务包裹到一起的 `Container` 
-2. Workflow 可以容纳 `Stage` , `Flow` , `Event` , `Job` , `Gateway` 。
+2. Workflow 可以容纳 `Stage` , `Flow` , `Event` , `Gateway` 。
 3. Workflow 系统顶级 `Container` 。
 5. Workflow 中的组件必须包含一个 Start `Event` 和最少一个End `Event` 。
 6. Workflow 中的组件流必须由一个 Start `Event` 开始 ，和最少一个End `Event` 结束。
 7. Workflow 中的组件之间不能形成环路，即容器中只能包含有向无环图（DAG）。
 
-### Stage ( `Container` )
+### Lane ( `Container` )
 
-1. Stage 是为了区分某一段流程的业务含义
-2. Stage 是可以容纳 `Flow` , `Event` , `Job` , `Task` , `Gateway` 组件的 `Container` 。
+1. Lane 是为了区分某一段流程的业务含义
+2. Lane 是可以容纳 `Flow` , `Event` , `Task` , `Gateway` 组件的 `Container` 。
 
 ``` 
 暂不使用
@@ -48,7 +48,7 @@
 ### Flow ( `Flow` )
 
 1. Flow 是一个单方向流向指示组件。
-2. Flow 可以指示 2 个 `Job` , `Gateway` , `Event` 的流向。
+2. Flow 可以指示 2 个 `Gateway` , `Event` 的流向。
 3. Flow 可以有描述信息来说明流程的业务含义。
 
 ### Gateway ( `Gateway` )
@@ -80,14 +80,172 @@
 ### Task ( `Activity` )(需要确定业务后再扩展)
 
 1. Task 是用于执行具体业务的组件
-2. Task 只能被包裹在 `Job` 中, 不能单独在 `Workflow` 中暴露
-3. Task 可以根据不同业务分为很多基础种类
+2. Task 可以根据不同业务分为很多基础种类
 
    1. AutoTask
    2. ManualTask
 
-## 类图
+## DSL 
 
+``` json
+{
+    "componentType": "WORKFLOW",
+    "name": "apiTestSave",
+    "workflowId": "5e55e3868fea0e1bd82e3096",
+    "lanes": [
+        {
+            "componentType": "LANE",
+            "name": "testLane",
+            "laneId": "laneId",
+            "componentIds": [
+                "startEventId",
+                "sequenceFlowId_1",
+                "autoTaskId",
+                "sequenceFlowId_2",
+                "manualTaskId",
+                "sequenceFlowId_3",
+                "endEventId"
+            ]
+        }
+    ],
+    "components": [
+        {
+            "componentType": "START_EVENT",
+            "id": "startEventId",
+            "name": "startEvent"
+        },
+        {
+            "componentType": "SEQUENCE_FLOW",
+            "flowId": "sequenceFlowId_1",
+            "fromComponentId": "startEventId",
+            "toComponentId": "autoTaskId"
+        },
+        {
+            "componentType": "AUTO_TASK"
+        },
+        {
+            "componentType": "SEQUENCE_FLOW",
+            "flowId": "sequenceFlowId_2",
+            "fromComponentId": "autoTaskId",
+            "toComponentId": "manualTaskId"
+        },
+        {
+            "componentType": "MANUAL_TASK"
+        },
+        {
+            "componentType": "SEQUENCE_FLOW",
+            "flowId": "sequenceFlowId_3",
+            "fromComponentId": "manualTaskId",
+            "toComponentId": "endEventId"
+        },
+        {
+            "componentType": "END_EVENT",
+            "id": "endEventId",
+            "name": "endEvent"
+        }
+    ],
+    "diagrams": [
+        {
+            "diagramType": "SHAPE",
+            "componentId": "startEventId",
+            "size": {
+                "width": 5,
+                "height": 10
+            },
+            "position": {
+                "position_x": 30,
+                "position_y": 40
+            }
+        },
+        {
+            "diagramType": "EDGE",
+            "flowId": "sequenceFlowId_1",
+            "startPosition": {
+                "position_x": 100,
+                "position_y": 200
+            },
+            "endPosition": {
+                "position_x": 300,
+                "position_y": 400
+            }
+        },
+        {
+            "diagramType": "SHAPE",
+            "componentId": "autoTaskId",
+            "size": {
+                "width": 10,
+                "height": 20
+            },
+            "position": {
+                "position_x": 30,
+                "position_y": 40
+            }
+        },
+        {
+            "diagramType": "EDGE",
+            "flowId": "sequenceFlowId_2",
+            "startPosition": {
+                "position_x": 100,
+                "position_y": 200
+            },
+            "endPosition": {
+                "position_x": 300,
+                "position_y": 400
+            }
+        },
+        {
+            "diagramType": "SHAPE",
+            "componentId": "autoTaskId",
+            "size": {
+                "width": 10,
+                "height": 20
+            },
+            "position": {
+                "position_x": 30,
+                "position_y": 40
+            }
+        },
+        {
+            "diagramType": "EDGE",
+            "flowId": "sequenceFlowId_3",
+            "startPosition": {
+                "position_x": 100,
+                "position_y": 200
+            },
+            "endPosition": {
+                "position_x": 300,
+                "position_y": 400
+            }
+        },
+        {
+            "diagramType": "SHAPE",
+            "componentId": "manualTaskId",
+            "size": {
+                "width": 10,
+                "height": 20
+            },
+            "position": {
+                "position_x": 30,
+                "position_y": 40
+            }
+        },
+        {
+            "diagramType": "SHAPE",
+            "componentId": "endEventId",
+            "size": {
+                "width": 5,
+                "height": 10
+            },
+            "position": {
+                "position_x": 30,
+                "position_y": 40
+            }
+        }
+    ]
+}
+```
+
+## 类图
 
 ``` mermaid
 classDiagram
@@ -124,6 +282,7 @@ classDiagram
         Version;
         StartDate;
         EndDate;
+        Status;
     }
 
     class Version{
