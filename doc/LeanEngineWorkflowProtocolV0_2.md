@@ -16,14 +16,14 @@
 
 * `Container` : 用于容纳和区分其他两种组件的一种组件，同种 `Container` 之间不能交叉和嵌套
 * `Activity` : 用于执行一些动作的组件
-* `Flow` : 用于连接所有除 `Workflow` 和 `Stage` 以外的其他组件, 标示他们的执行先后顺序
+* `Flow` : 用于连接所有除 `Workflow` 和 `Lane` 以外的其他组件, 标示他们的执行先后顺序
 * `Event` : 用于触发不影响流程本身运行的操作, 类似于发送短信/发送邮件/记录日志等
 * `Gateway` : 是一个基于流入 `Flow` 和 `Gateway` 本身类型进行流出 `Flow` 选择的组件
 
 ### Workflow ( `Container` )
 
 1. Workflow 是为了将达到某些目标的一系列活动和任务包裹到一起的 `Container` 
-2. Workflow 可以容纳 `Stage` , `Flow` , `Event` , `Gateway` 。
+2. Workflow 可以容纳 `Lane` , `Flow` , `Event` , `Gateway` 。
 3. Workflow 系统顶级 `Container` 。
 5. Workflow 中的组件必须包含一个 Start `Event` 和最少一个End `Event` 。
 6. Workflow 中的组件流必须由一个 Start `Event` 开始 ，和最少一个End `Event` 结束。
@@ -258,7 +258,7 @@ classDiagram
     Component --o  Version
 
     Container <|.. Workflow
-    Container <|.. Stage
+    Container <|.. Lane
 
     Workflow  --o  WorkflowModule
 
@@ -318,7 +318,7 @@ classDiagram
         <<class>>
         GlobalData;
     }
-    class Stage{
+    class Lane{
         <<class>>
     }
     class WorkflowModule{
