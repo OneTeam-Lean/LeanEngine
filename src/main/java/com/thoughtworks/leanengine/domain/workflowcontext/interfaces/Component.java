@@ -34,4 +34,9 @@ public abstract class Component implements Serializable {
   public Component(ComponentType componentType) {
     this.componentType = componentType;
   }
+
+  public boolean isTask() {
+    return componentType.equals(ComponentType.MANUAL_TASK)
+        || componentType.equals(ComponentType.AUTO_TASK);
+  }
 }

@@ -3,7 +3,9 @@ package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import java.time.LocalDateTime;
+import lombok.Data;
 
+@Data
 public abstract class Activity extends Component {
   private String id;
   private String name;
