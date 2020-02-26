@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.UUID;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.StringUtils;
 
@@ -21,7 +20,6 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
   @Id private String workflowId;
   private ComponentType componentType;
 
-  @Indexed(unique = true)
   private String name;
 
   private List<Lane> lanes;
