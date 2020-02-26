@@ -1,7 +1,7 @@
-FROM oracle/openjdk:8
+FROM openjdk:8-jdk-alpine
 
 MAINTAINER "Huang Quanbin" <flying.binh@gmail.com>
 
-ADD build/libs/LeanEngine-1.0.0-SNAPSHOT.jar api.jar
-ENV JAVA_OPTS=""
-CMD [ "sh", "-c", "java $JAVA_OPTS -jar api.jar" ]
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
