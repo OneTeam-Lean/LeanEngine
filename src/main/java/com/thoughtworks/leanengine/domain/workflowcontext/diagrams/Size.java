@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.common;
+package com.thoughtworks.leanengine.domain.workflowcontext.diagrams;
 
 import java.io.Serializable;
 import lombok.Getter;

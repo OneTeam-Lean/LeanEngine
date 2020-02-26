@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.common;
+package com.thoughtworks.leanengine.domain.workflowcontext.diagrams;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.DiagramType;
 import lombok.Getter;

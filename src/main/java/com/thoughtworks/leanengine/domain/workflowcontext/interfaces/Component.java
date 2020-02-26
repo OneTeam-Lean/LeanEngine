@@ -10,7 +10,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.EndEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.IntermediateEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.StartEvent;
-import com.thoughtworks.leanengine.domain.workflowcontext.flow.SequenceFlow;
+import com.thoughtworks.leanengine.domain.workflowcontext.flows.SequenceFlow;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.ManualTask;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.flow;
+package com.thoughtworks.leanengine.domain.workflowcontext.flows;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Flow;

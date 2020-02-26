@@ -1,8 +1,8 @@
 package com.thoughtworks.leanengine.infra.repo.po.workflow;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.common.Diagram;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
+import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowCouldNotBeNullException;

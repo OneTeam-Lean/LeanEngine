@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.gateway;
+package com.thoughtworks.leanengine.domain.workflowcontext.gateways;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Gateway;

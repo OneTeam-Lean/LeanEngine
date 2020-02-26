@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.common;
+package com.thoughtworks.leanengine.domain.workflowcontext.diagrams;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
