@@ -1,0 +1,162 @@
+@startuml
+package workflowcontext.workflow{
+ abstract class Component {
+ - componentType:ComponentType
+ - createDate:LocalDateTime
+ - version:Version
+}
+
+abstract class Container {
+    - containerName:String
+}
+abstract class Flow {
+    - flowComment:String
+}
+abstract class Event {
+}
+abstract class Activity {
+}
+abstract class Gateway {
+}
+enum ComponentType{
+  WORKFLOW
+  LANE
+  SEQUENCE_FLOW
+  START_EVENT
+  END_EVENT
+  INTERMEDIATE_EVENT
+  AUTO_TASK
+  MANUAL_TASK
+}
+class Version{
+    - id
+    - fromVersion
+    - toVersion
+    - createDate
+}
+  Component <|-- Flow
+  Component <|-- Event
+  Component <|-- Activity
+  Component <|-- Gateway
+  Component <|-- Container
+  ComponentType "1"-*"1" Component
+  Component "1"*-"1" Version
+
+class Workflow {
+    - id
+    - components
+    - lanes
+    - diagrams
+}
+  Container <|-- Workflow
+class Lane{
+    - id
+    - componentIds
+}
+  Container <|-- Lane
+class StartEvent{
+
+}
+class EndEvent{
+
+}
+class IntermediateEvent{
+
+}
+  Event <|-- StartEvent
+  Event <|-- IntermediateEvent
+  Event <|-- EndEvent
+
+class AutoTask{
+
+}
+class ManualTask{
+
+}
+
+ Activity <|-- AutoTask
+ Activity <|-- ManualTask
+
+class InclusiveGateway{
+
+}
+class ExclusiveGateway{
+
+}
+class ParallelGateway{
+
+}
+ Gateway <|-- InclusiveGateway
+ Gateway <|-- ExclusiveGateway
+ Gateway <|-- ParallelGateway
+
+class SequenceFlow{
+    - fromComponentId
+    - toComponentId
+}
+ Flow <|-- SequenceFlow
+
+  Lane                  "0..*"--*"0..1" Workflow
+  SequenceFlow          "0..*"--*"0..1" Workflow
+  StartEvent            "0..*"--*"0..1" Workflow
+  EndEvent              "0..*"--*"0..1" Workflow
+  IntermediateEvent     "0..*"--*"0..1" Workflow
+  AutoTask              "0..*"--*"0..1" Workflow
+  ManualTask            "0..*"--*"0..1" Workflow
+  InclusiveGateway      "0..*"--*"0..1" Workflow
+  ExclusiveGateway      "0..*"--*"0..1" Workflow
+  ParallelGateway       "0..*"--*"0..1" Workflow
+
+}
+
+
+package workflowcontext.diagram{
+
+abstract class Diagram{
+    - diagramType
+}
+enum DiagramType{
+    SHAPE
+    EDGE
+}
+
+class Shape <<Value>>{
+    - componentId
+    - size
+    - position
+}
+class Edge<<Value>>{
+    - fromComponentId
+    - toComponentId
+    - fromAnchor
+    - toAnchor
+}
+
+class Size<<Value>>{
+    - height
+    - width
+}
+class Position<<Value>>{
+    - x
+    - y
+}
+
+enum Anchor{
+    First
+    Second
+    Third
+    Fourth
+}
+ DiagramType -* Diagram
+
+ Diagram <|-- Shape
+ Diagram <|-- Edge
+
+ Shape *-- Size
+ Shape *-- Position
+
+ Edge *-- Anchor
+}
+
+ Workflow "0..1"*--"0..*" Diagram
+@enduml
