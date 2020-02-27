@@ -7,6 +7,13 @@ pipeline {
             git 'https://github.com/OneTeam-Lean/LeanEngine.git'
 
             sh "./go image 0.${BUILD_NUMBER} ${HARBOR_PASSWORD} "
+
+            if(${DEPLOY_TO_PRODUCTION}){
+                echo "-ready to deploy-"
+            }
+            else{
+                ehco "- no need to deploy-"
+            }
          }
 
          post {
