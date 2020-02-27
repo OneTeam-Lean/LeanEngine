@@ -8,11 +8,14 @@ pipeline {
 
             sh "./go image 0.${BUILD_NUMBER} ${HARBOR_PASSWORD} "
 
-            if(${DEPLOY_TO_PRODUCTION}){
-                echo "-ready to deploy-"
-            }
-            else{
-                ehco "- no need to deploy-"
+            script{
+                if(params.DEPLOY_TO_PRODUCTION){
+                    echo "-ready to deploy-"
+                    sh "./go deploy 0.${BUILD_NUMBER}"
+                }
+                else{
+                    echo "- no need to deploy-"
+                }
             }
          }
 
