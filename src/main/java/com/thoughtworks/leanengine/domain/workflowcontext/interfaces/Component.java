@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
+import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.EndEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.IntermediateEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.StartEvent;
@@ -14,9 +15,9 @@ import com.thoughtworks.leanengine.domain.workflowcontext.flows.SequenceFlow;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.ManualTask;
 import java.io.Serializable;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "componentType")
 @JsonSubTypes({
   @Type(value = Workflow.class, name = "WORKFLOW"),
@@ -30,13 +31,10 @@ import lombok.Getter;
 })
 public abstract class Component implements Serializable {
   @JsonIgnore private ComponentType componentType;
+  protected Status status;
+  protected String id;
 
   public Component(ComponentType componentType) {
     this.componentType = componentType;
-  }
-
-  public boolean isTask() {
-    return componentType.equals(ComponentType.MANUAL_TASK)
-        || componentType.equals(ComponentType.AUTO_TASK);
   }
 }

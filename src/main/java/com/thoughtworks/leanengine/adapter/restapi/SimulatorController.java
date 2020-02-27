@@ -1,7 +1,6 @@
 package com.thoughtworks.leanengine.adapter.restapi;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNotFoundException;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
@@ -35,11 +34,8 @@ public class SimulatorController {
             .stream()
             .map(
                 item -> {
-                  if (item.isTask()) {
-                    Activity task = (Activity) item;
-                    if (task.getId().equalsIgnoreCase(componentID)) {
-                      task.setStatus(status);
-                    }
+                  if (componentID.equalsIgnoreCase(item.getId())) {
+                    item.setStatus(status);
                   }
                   return item;
                 })

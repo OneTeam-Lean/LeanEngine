@@ -7,9 +7,7 @@ import lombok.Data;
 
 @Data
 public abstract class Activity extends Component {
-  private String id;
   private String name;
-  private Status status;
   private LocalDateTime startTime;
   private LocalDateTime endTime;
 

@@ -5,7 +5,6 @@ import lombok.Getter;
 
 @Getter
 public abstract class Event extends Component {
-  private String id;
   private String name;
 
   public Event(ComponentType componentType) {

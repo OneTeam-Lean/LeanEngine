@@ -7,6 +7,4 @@ public abstract class Gateway extends Component {
   public Gateway(ComponentType componentType) {
     super(componentType);
   }
-
-  private String id;
 }

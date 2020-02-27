@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.thoughtworks.leanengine.ApiTestBase;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.ManualTask;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
@@ -28,7 +27,7 @@ class SimulatorControllerTest extends ApiTestBase {
         .stream()
         .forEach(
             item -> {
-              if (item.isTask() && ((Activity) item).getId().equalsIgnoreCase("manualTaskId")) {
+              if ("manualTaskId".equalsIgnoreCase(item.getId())) {
                 ManualTask manualTask = (ManualTask) item;
                 assertEquals(manualTask.getStatus(), Status.SUCCESS);
               }
