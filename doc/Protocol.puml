@@ -47,6 +47,7 @@ class Workflow {
     - components
     - lanes
     - diagrams
+    - runId
 }
   Container <|-- Workflow
 class Lane{
@@ -96,16 +97,16 @@ class SequenceFlow{
 }
  Flow <|-- SequenceFlow
 
-  Lane                  "0..*"--*"0..1" Workflow
-  SequenceFlow          "0..*"--*"0..1" Workflow
-  StartEvent            "0..*"--*"0..1" Workflow
-  EndEvent              "0..*"--*"0..1" Workflow
-  IntermediateEvent     "0..*"--*"0..1" Workflow
-  AutoTask              "0..*"--*"0..1" Workflow
-  ManualTask            "0..*"--*"0..1" Workflow
-  InclusiveGateway      "0..*"--*"0..1" Workflow
-  ExclusiveGateway      "0..*"--*"0..1" Workflow
-  ParallelGateway       "0..*"--*"0..1" Workflow
+  Lane                  "0..*"<--*"0..1" Workflow
+  SequenceFlow          "0..*"<--*"0..1" Workflow
+  StartEvent            "0..*"<--*"0..1" Workflow
+  EndEvent              "0..*"<--*"0..1" Workflow
+  IntermediateEvent     "0..*"<--*"0..1" Workflow
+  AutoTask              "0..*"<--*"0..1" Workflow
+  ManualTask            "0..*"<--*"0..1" Workflow
+  InclusiveGateway      "0..*"<--*"0..1" Workflow
+  ExclusiveGateway      "0..*"<--*"0..1" Workflow
+  ParallelGateway       "0..*"<--*"0..1" Workflow
 
 }
 
@@ -147,16 +148,16 @@ enum Anchor{
     Third
     Fourth
 }
- DiagramType -* Diagram
+ DiagramType <-* Diagram
 
  Diagram <|-- Shape
  Diagram <|-- Edge
 
- Shape *-- Size
- Shape *-- Position
+ Shape *--> Size
+ Shape *--> Position
 
- Edge *-- Anchor
+ Edge *--> Anchor
 }
 
- Workflow "0..1"*--"0..*" Diagram
+ Workflow "0..1"*-->"0..*" Diagram
 @enduml
