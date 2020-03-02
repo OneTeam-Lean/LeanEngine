@@ -13,4 +13,7 @@ public enum ComponentType {
   // task
   AUTO_TASK,
   MANUAL_TASK,
+  // Gateway
+  CONDITIONAL_GATEWAY,
+  PARALLEL_GATEWAY,
 }
