@@ -31,6 +31,6 @@ public class WorkflowController {
 
   @PutMapping
   public void updateWorkflow(@RequestBody Workflow workflow) {
-    workflowUserCase.saveWorkflow(workflow);
+    workflowUserCase.updateWorkflow(workflow);
   }
 }

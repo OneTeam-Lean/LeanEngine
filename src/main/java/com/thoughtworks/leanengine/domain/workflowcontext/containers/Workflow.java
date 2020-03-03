@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Workflow extends Container {
-  private String workflowId;
   private List<Lane> lanes;
   private List<Component> components;
   private List<Diagram> diagrams;
@@ -27,7 +26,7 @@ public class Workflow extends Container {
       List<Component> components,
       List<Diagram> diagrams) {
     super(ComponentType.WORKFLOW, name);
-    this.workflowId = workflowId;
+    this.id = workflowId;
     this.lanes = lanes;
     this.components = components;
     this.diagrams = diagrams;

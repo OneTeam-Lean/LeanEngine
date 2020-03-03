@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 @Document(collection = "workflow")
 @Data
 public class WorkflowPO implements PersistenceObject<Workflow> {
-  @Id private String workflowId;
+  @Id private String id;
   private ComponentType componentType;
 
   private String name;
@@ -28,7 +28,7 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
 
   @Override
   public Workflow toDomainModel() {
-    return new Workflow(this.name, this.workflowId, this.lanes, this.components, this.diagrams);
+    return new Workflow(this.name, this.id, this.lanes, this.components, this.diagrams);
   }
 
   public static WorkflowPO of(Workflow workflow) {
@@ -36,14 +36,14 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
       throw new WorkflowCouldNotBeNullException();
     }
     WorkflowPO workflowPO = new WorkflowPO();
-    workflowPO.setWorkflowId(workflow.getWorkflowId());
+    workflowPO.setId(workflow.getId());
     workflowPO.setName(workflow.getName());
     workflowPO.setComponents(workflow.getComponents());
     workflowPO.setDiagrams(workflow.getDiagrams());
     workflowPO.setLanes(workflow.getLanes());
     workflowPO.setComponentType(workflow.getComponentType());
-    if (StringUtils.isEmpty(workflowPO.getWorkflowId())) {
-      workflowPO.setWorkflowId(UUID.randomUUID().toString());
+    if (StringUtils.isEmpty(workflowPO.getId())) {
+      workflowPO.setId(UUID.randomUUID().toString());
     }
     return workflowPO;
   }
