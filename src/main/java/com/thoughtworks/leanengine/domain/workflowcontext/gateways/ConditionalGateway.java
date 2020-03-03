@@ -4,12 +4,10 @@ import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Gateway;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Job;
-import lombok.Data;
 
-@Data
 public class ConditionalGateway extends Gateway implements Job {
-  public ConditionalGateway(ComponentType componentType) {
-    super(componentType);
+  public ConditionalGateway() {
+    super(ComponentType.CONDITIONAL_GATEWAY);
   }
 
   private String conditionDescription;
