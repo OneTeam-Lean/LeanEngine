@@ -97,3 +97,10 @@ task verifyFormatting(type: VerifyGoogleJavaFormat) {
     include '**/*.java'
     ignoreFailures false
 }
+
+
+def profiles = 'local'
+
+bootRun {
+    args = ["--spring.profiles.active=" + profiles]
+}

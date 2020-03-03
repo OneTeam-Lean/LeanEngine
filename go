@@ -18,7 +18,7 @@ case "$1" in
     docker-compose -f config/local/docker-compose.yml up -d
     ;;
   "run")
-    ./gradlew -Dspring.profiles.active="local" bootRun
+    ./gradlew  bootRun -Plocal
     exit 0
     ;;
   "health")

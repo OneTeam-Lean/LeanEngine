@@ -5,6 +5,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.containers.WorkflowSer
 import com.thoughtworks.leanengine.infra.common.exceptions.WhenCreateWorkflowItIdNotShouldBeExist;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNameExistException;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNotFoundException;
+import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +46,7 @@ public class WorkflowUserCase {
 
   private void checkNameDuplication(Workflow updateWorkflow, Workflow queryWorkflowByName) {
     if (queryWorkflowByName != null
-        && !(updateWorkflow.getId().equals(queryWorkflowByName.getId()))) {
+        && !Objects.equals(updateWorkflow.getId(), queryWorkflowByName.getId())) {
       throw new WorkflowNameExistException();
     }
   }

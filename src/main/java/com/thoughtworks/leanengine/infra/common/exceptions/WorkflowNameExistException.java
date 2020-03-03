@@ -1,3 +1,3 @@
 package com.thoughtworks.leanengine.infra.common.exceptions;
 
-public class WorkflowNameExistException extends RuntimeException {}
+public class WorkflowNameExistException extends WorkflowException {}

@@ -1,3 +1,3 @@
 package com.thoughtworks.leanengine.infra.common.exceptions;
 
-public class WhenCreateWorkflowItIdNotShouldBeExist extends RuntimeException {}
+public class WhenCreateWorkflowItIdNotShouldBeExist extends WorkflowException {}

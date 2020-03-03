@@ -3,7 +3,8 @@ spring:
     mongodb:
       username: root
       password: root
-      authenticationDatabase: admin
+      database: test
+      authentication-database: admin
 management:
   endpoints:
     enabled-by-default: false

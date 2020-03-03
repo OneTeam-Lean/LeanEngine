@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 @Data
 public class WorkflowPO implements PersistenceObject<Workflow> {
   @Id private String id;
+
   private ComponentType componentType;
 
   private String name;
