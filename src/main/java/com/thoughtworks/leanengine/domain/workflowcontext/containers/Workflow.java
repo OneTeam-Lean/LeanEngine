@@ -1,5 +1,6 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.containers;
 
+import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowDataContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
@@ -14,6 +15,7 @@ public class Workflow extends Container {
   private List<Lane> lanes;
   private List<Component> components;
   private List<Diagram> diagrams;
+  private WorkflowDataContext workflowDataContext;
 
   public Workflow() {
     super(ComponentType.WORKFLOW);
@@ -30,5 +32,6 @@ public class Workflow extends Container {
     this.lanes = lanes;
     this.components = components;
     this.diagrams = diagrams;
+    this.workflowDataContext = new WorkflowDataContext();
   }
 }
