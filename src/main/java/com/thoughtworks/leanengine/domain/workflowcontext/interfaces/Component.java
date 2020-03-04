@@ -33,7 +33,7 @@ import lombok.Data;
   @Type(value = ConditionalGateway.class, name = "CONDITIONAL_GATEWAY"),
   @Type(value = ParallelGateway.class, name = "PARALLEL_GATEWAY")
 })
-public abstract class Component implements Serializable {
+public abstract class Component implements Serializable, Job {
   @JsonIgnore private ComponentType componentType;
   protected Status status;
   protected String id;
@@ -41,4 +41,7 @@ public abstract class Component implements Serializable {
   public Component(ComponentType componentType) {
     this.componentType = componentType;
   }
+
+  @Override
+  public void execute() {}
 }

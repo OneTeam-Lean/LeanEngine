@@ -3,9 +3,10 @@ package com.thoughtworks.leanengine.domain.workflowcontext.gateways;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Gateway;
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Job;
+import lombok.Data;
 
-public class ParallelGateway extends Gateway implements Job {
+@Data
+public class ParallelGateway extends Gateway {
   public ParallelGateway() {
     super(ComponentType.PARALLEL_GATEWAY);
   }

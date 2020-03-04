@@ -3,10 +3,9 @@ package com.thoughtworks.leanengine.domain.workflowcontext.tasks;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Job;
 import java.time.LocalDateTime;
 
-public class ManualTask extends Activity implements Job {
+public class ManualTask extends Activity {
   private String triggeredBy;
   private boolean isTriggered;
 
