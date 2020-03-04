@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
+import com.thoughtworks.leanengine.domain.workflowcontext.data.ComponentData;
+import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.EndEvent;
@@ -33,7 +35,7 @@ import lombok.Data;
   @Type(value = ConditionalGateway.class, name = "CONDITIONAL_GATEWAY"),
   @Type(value = ParallelGateway.class, name = "PARALLEL_GATEWAY")
 })
-public abstract class Component implements Serializable, Job {
+public abstract class Component implements Serializable {
   @JsonIgnore private ComponentType componentType;
   protected Status status;
   protected String id;
@@ -42,6 +44,7 @@ public abstract class Component implements Serializable, Job {
     this.componentType = componentType;
   }
 
-  @Override
-  public void execute() {}
+  public abstract ComponentData execute(WorkflowInstanceContext workflowInstanceContext);
+
+  public abstract Component nextComponent();
 }

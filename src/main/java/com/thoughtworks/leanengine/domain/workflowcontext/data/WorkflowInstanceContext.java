@@ -8,7 +8,7 @@ import java.util.Map;
 import lombok.Data;
 
 @Data
-public class WorkflowDataContext {
+public class WorkflowInstanceContext {
   private Map<String, ComponentData> dataMap = newHashMap();
   private List<ComponentData> dataList = newArrayList();
 
