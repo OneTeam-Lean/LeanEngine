@@ -3,7 +3,9 @@ package com.thoughtworks.leanengine.domain.workflowcontext.instance;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
+import lombok.Getter;
 
+@Getter
 public class WorkflowInstance {
   private Workflow workflow;
   private WorkflowInstanceContext workflowInstanceContext;
