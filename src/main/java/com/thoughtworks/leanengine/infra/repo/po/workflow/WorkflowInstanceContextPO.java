@@ -6,7 +6,6 @@ import com.thoughtworks.leanengine.domain.workflowcontext.data.ComponentData;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.infra.repo.po.PersistenceObject;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.data.annotation.Id;
 
 public class WorkflowInstanceContextPO implements PersistenceObject<WorkflowInstanceContext> {
@@ -15,17 +14,13 @@ public class WorkflowInstanceContextPO implements PersistenceObject<WorkflowInst
 
   public static WorkflowInstanceContextPO of(String workflowId, WorkflowInstanceContext context) {
     WorkflowInstanceContextPO po = new WorkflowInstanceContextPO();
-    po.dataList = context.getDataList();
+    po.dataList = context.getDataListCopy();
     po.workflowId = workflowId;
     return po;
   }
 
   @Override
   public WorkflowInstanceContext toDomainModel() {
-    WorkflowInstanceContext workflowInstanceContext = new WorkflowInstanceContext();
-    workflowInstanceContext.setDataList(dataList);
-    workflowInstanceContext.setDataMap(
-        dataList.stream().collect(Collectors.toMap(ComponentData::getComponentId, data -> data)));
-    return workflowInstanceContext;
+    return new WorkflowInstanceContext(dataList);
   }
 }

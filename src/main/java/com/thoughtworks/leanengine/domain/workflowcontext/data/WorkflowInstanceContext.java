@@ -5,12 +5,22 @@ import static com.google.common.collect.Maps.newHashMap;
 
 import java.util.List;
 import java.util.Map;
-import lombok.Data;
+import java.util.stream.Collectors;
+import org.springframework.util.CollectionUtils;
 
-@Data
 public class WorkflowInstanceContext {
   private Map<String, ComponentData> dataMap = newHashMap();
   private List<ComponentData> dataList = newArrayList();
+
+  public WorkflowInstanceContext() {}
+
+  public WorkflowInstanceContext(List<ComponentData> dataList) {
+    if (!CollectionUtils.isEmpty(dataList)) {
+      this.dataList = dataList;
+      this.dataMap =
+          dataList.stream().collect(Collectors.toMap(ComponentData::getComponentId, data -> data));
+    }
+  }
 
   public void addComponentData(ComponentData componentData) {
     dataMap.put(componentData.getComponentId(), componentData);
@@ -26,5 +36,13 @@ public class WorkflowInstanceContext {
       return null;
     }
     return dataList.get(dataList.size() - 1);
+  }
+
+  public int getComponentDataSize() {
+    return dataList.size();
+  }
+
+  public List<ComponentData> getDataListCopy() {
+    return newArrayList(dataList);
   }
 }

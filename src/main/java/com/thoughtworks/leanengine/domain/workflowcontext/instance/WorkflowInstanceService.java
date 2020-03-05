@@ -2,21 +2,22 @@ package com.thoughtworks.leanengine.domain.workflowcontext.instance;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowInstanceContextPO;
-import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowInstanceRepository;
+import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowInstanceContextRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WorkflowInstanceService {
-  private final WorkflowInstanceRepository workflowInstanceRepository;
+  private final WorkflowInstanceContextRepository workflowInstanceContextRepository;
 
-  public WorkflowInstanceService(WorkflowInstanceRepository workflowInstanceRepository) {
-    this.workflowInstanceRepository = workflowInstanceRepository;
+  public WorkflowInstanceService(
+      WorkflowInstanceContextRepository workflowInstanceContextRepository) {
+    this.workflowInstanceContextRepository = workflowInstanceContextRepository;
   }
 
   public void runInstance(Workflow workflow) {
     WorkflowInstance workflowInstance = WorkflowInstance.of(workflow);
     workflowInstance.execute();
-    workflowInstanceRepository.save(
+    workflowInstanceContextRepository.save(
         WorkflowInstanceContextPO.of(
             workflow.getId(), workflowInstance.getWorkflowInstanceContext()));
   }
