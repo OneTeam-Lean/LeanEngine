@@ -1,10 +1,12 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.flows;
 
+import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.ComponentData;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Flow;
+import java.util.List;
 import java.util.UUID;
 
 public class SequenceFlow extends Flow {
@@ -28,7 +30,7 @@ public class SequenceFlow extends Flow {
   }
 
   @Override
-  public Component nextComponent() {
+  public List<Component> nextComponent(Workflow workflow) {
     return null;
   }
 }

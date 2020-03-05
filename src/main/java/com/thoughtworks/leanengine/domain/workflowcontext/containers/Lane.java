@@ -31,7 +31,7 @@ public class Lane extends Container {
   }
 
   @Override
-  public Component nextComponent() {
+  public List<Component> nextComponent(Workflow workflow) {
     return null;
   }
 }

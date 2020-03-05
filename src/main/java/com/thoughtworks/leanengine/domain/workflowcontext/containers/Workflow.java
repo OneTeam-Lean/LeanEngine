@@ -42,7 +42,7 @@ public class Workflow extends Container {
   }
 
   @Override
-  public Component nextComponent() {
+  public List<Component> nextComponent(Workflow workflow) {
     return null;
   }
 }

@@ -2,6 +2,7 @@ package com.thoughtworks.leanengine.domain.workflowcontext.gateways;
 
 import static com.google.common.collect.Maps.newHashMap;
 
+import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.ComponentData;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
@@ -10,6 +11,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Gateway;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class ConditionalGateway extends Gateway {
@@ -36,7 +38,7 @@ public class ConditionalGateway extends Gateway {
   }
 
   @Override
-  public Component nextComponent() {
+  public List<Component> nextComponent(Workflow workflow) {
     return null;
   }
 }

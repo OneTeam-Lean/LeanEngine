@@ -1,5 +1,6 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.tasks;
 
+import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.ComponentData;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
@@ -7,6 +8,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ManualTask extends Activity {
   private String triggeredBy;
@@ -33,7 +35,7 @@ public class ManualTask extends Activity {
   }
 
   @Override
-  public Component nextComponent() {
+  public List<Component> nextComponent(Workflow workflow) {
     return null;
   }
 }

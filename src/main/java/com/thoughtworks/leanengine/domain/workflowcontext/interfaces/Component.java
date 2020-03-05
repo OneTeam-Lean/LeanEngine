@@ -19,6 +19,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.gateways.ParallelGatew
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.ManualTask;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -46,5 +47,5 @@ public abstract class Component implements Serializable {
 
   public abstract ComponentData execute(WorkflowInstanceContext workflowInstanceContext);
 
-  public abstract Component nextComponent();
+  public abstract List<Component> nextComponent(Workflow workflow);
 }
