@@ -5,7 +5,6 @@ import lombok.Getter;
 
 @Getter
 public abstract class Flow extends Component {
-  private String flowId;
   private String fromComponentId;
   private String toComponentId;
 
@@ -15,8 +14,7 @@ public abstract class Flow extends Component {
 
   public Flow(
       ComponentType componentType, String flowId, String fromComponentId, String toComponentId) {
-    super(componentType);
-    this.flowId = flowId;
+    super(flowId, componentType);
     this.fromComponentId = fromComponentId;
     this.toComponentId = toComponentId;
   }

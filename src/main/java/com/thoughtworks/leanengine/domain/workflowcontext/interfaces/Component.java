@@ -55,6 +55,9 @@ public abstract class Component implements Serializable {
   }
 
   public final ComponentData execute(WorkflowInstanceContext workflowInstanceContext) {
+    if (isBlocked()) {
+      return null;
+    }
     LocalDateTime startDateTime = LocalDateTime.now();
     Map<String, Object> data = newHashMap();
     try {
@@ -89,5 +92,9 @@ public abstract class Component implements Serializable {
       Boolean runningResult,
       Map<String, Object> data) {
     return new ComponentData(componentId, startDateTime, endDateTime, runningResult, data);
+  }
+
+  public boolean isBlocked() {
+    return Status.BLOCKED == this.status;
   }
 }

@@ -21,10 +21,10 @@ public class ManualTask extends Activity {
 
   @Override
   protected Map<String, Object> executeComponent(WorkflowInstanceContext workflowInstanceContext) {
+    turnStatus(Status.BLOCKED);
     while (!isTriggered) {
-      continue;
+      turnStatus(Status.SUCCESS);
     }
-    turnStatus(Status.SUCCESS);
     return null;
   }
 }

@@ -17,7 +17,7 @@ public class ParallelGatewayTail extends Gateway {
   public Map<String, Object> executeComponent(WorkflowInstanceContext workflowInstanceContext) {
     this.counter++;
     if (counter < 2) {
-      turnStatus(Status.PENDING);
+      turnStatus(Status.BLOCKED);
       return null;
     }
     turnStatus(Status.SUCCESS);

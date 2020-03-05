@@ -6,7 +6,10 @@ import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.Getter;
+import org.springframework.util.CollectionUtils;
 
 @Getter
 public class WorkflowInstance {
@@ -21,7 +24,32 @@ public class WorkflowInstance {
   }
 
   public void execute() {
-    List<Component> needExecuteComponent = newArrayList(workflow.getComponents().get(0));
-    // TODO
+    List<Component> waitExecuteComponent = newArrayList(workflow.getComponents().get(0));
+    while (!CollectionUtils.isEmpty(waitExecuteComponent)) {
+      waitExecuteComponent
+          .stream()
+          .map(component -> component.execute(workflowInstanceContext))
+          .filter(Objects::nonNull)
+          .forEach(workflowInstanceContext::addComponentData);
+      waitExecuteComponent = getNextExecuteComponents(waitExecuteComponent);
+    }
+  }
+
+  private List<Component> getNextExecuteComponents(List<Component> waitExecuteComponent) {
+    return waitExecuteComponent
+        .stream()
+        .flatMap(
+            component -> {
+              if (component.isBlocked()) {
+                return newArrayList(component).stream();
+              }
+              return component
+                  .getNextComponentIds()
+                  .stream()
+                  .map(id -> workflow.getComponentMap().get(id))
+                  .collect(Collectors.toList())
+                  .stream();
+            })
+        .collect(Collectors.toList());
   }
 }
