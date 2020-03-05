@@ -35,7 +35,7 @@ public class SimulatorController {
             .map(
                 item -> {
                   if (componentID.equalsIgnoreCase(item.getId())) {
-                    item.setStatus(status);
+                    item.turnStatus(status);
                   }
                   return item;
                 })

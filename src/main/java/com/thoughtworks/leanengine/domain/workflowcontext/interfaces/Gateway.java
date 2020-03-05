@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public abstract class Gateway extends Component {
-  private String firstFlowId;
+  private String firstFlowId; // Fixme:no user.
   private String secondFlowId;
   private Boolean isStartGateway;
 

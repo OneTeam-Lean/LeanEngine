@@ -13,8 +13,7 @@ public class Lane extends Container {
   private List<String> ComponentIds;
 
   public Lane(String name, String laneId, List<String> componentIds) {
-    super(name);
-    setId(laneId);
+    super(laneId, name);
     ComponentIds = componentIds;
   }
 }

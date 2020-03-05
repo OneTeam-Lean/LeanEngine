@@ -1,9 +1,6 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.enums;
 
 public enum ComponentType {
-  // container
-  WORKFLOW,
-  LANE,
   // flow
   SEQUENCE_FLOW,
   // event

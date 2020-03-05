@@ -12,8 +12,7 @@ public abstract class Event extends Component {
   }
 
   public Event(ComponentType componentType, String id, String name) {
-    super(componentType);
-    this.id = id;
+    super(id, componentType);
     this.name = name;
   }
 }

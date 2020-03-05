@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ComponentData {
-  private String ComponentId;
+  private String componentId;
   private LocalDateTime startDateTime;
   private LocalDateTime endDateTime;
   private Boolean runningResult;

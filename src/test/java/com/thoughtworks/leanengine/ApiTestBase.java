@@ -10,7 +10,6 @@ import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Edge;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Position;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Shape;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Size;
-import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.EndEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.events.StartEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.flows.SequenceFlow;
@@ -65,15 +64,10 @@ public class ApiTestBase {
         newArrayList(
             new StartEvent("startEventId", "startEvent"),
             new SequenceFlow("sequenceFlowId_1", "startEventId", "autoTaskId"),
-            new AutoTask(
-                "autoTaskId", "taskName", Status.PENDING, LocalDateTime.now(), LocalDateTime.now()),
+            new AutoTask("autoTaskId", "taskName", LocalDateTime.now(), LocalDateTime.now()),
             new SequenceFlow("sequenceFlowId_2", "autoTaskId", "manualTaskId"),
             new ManualTask(
-                "manualTaskId",
-                "manualTaskName",
-                Status.PENDING,
-                LocalDateTime.now(),
-                LocalDateTime.now()),
+                "manualTaskId", "manualTaskName", LocalDateTime.now(), LocalDateTime.now()),
             new SequenceFlow("sequenceFlowId_3", "manualTaskId", "endEventId"),
             new EndEvent("endEventId", "endEvent")));
     workflowPO.setName(name);
@@ -104,8 +98,8 @@ public class ApiTestBase {
   }
 
   protected String getWorkflowJson(String workflowName) throws JsonProcessingException {
-    Workflow workflow = new Workflow();
-    workflow.setName(workflowName);
+    Workflow workflow =
+        new Workflow(workflowName, null, newArrayList(), newArrayList(), newArrayList());
     return objectMapper.writeValueAsString(workflow);
   }
 

@@ -3,9 +3,7 @@ package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-@Data
 public abstract class Activity extends Component {
   private String name;
   private LocalDateTime startTime;
@@ -19,18 +17,12 @@ public abstract class Activity extends Component {
       ComponentType componentType,
       String id,
       String name,
-      Status status,
       LocalDateTime startTime,
       LocalDateTime endTime) {
-    super(componentType);
-    this.id = id;
+    super(id, componentType);
     this.name = name;
-    this.status = status;
     this.startTime = startTime;
     this.endTime = endTime;
+    turnStatus(Status.PENDING);
   }
-
-  public void before() {}
-
-  public void done() {}
 }
