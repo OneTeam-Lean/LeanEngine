@@ -15,7 +15,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.events.IntermediateEve
 import com.thoughtworks.leanengine.domain.workflowcontext.events.StartEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.flows.SequenceFlow;
 import com.thoughtworks.leanengine.domain.workflowcontext.gateways.ConditionalGateway;
-import com.thoughtworks.leanengine.domain.workflowcontext.gateways.ParallelGateway;
+import com.thoughtworks.leanengine.domain.workflowcontext.gateways.ParallelGatewayHead;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.ManualTask;
 import java.io.Serializable;
@@ -33,7 +33,7 @@ import lombok.Data;
   @Type(value = ManualTask.class, name = "MANUAL_TASK"),
   @Type(value = SequenceFlow.class, name = "SEQUENCE_FLOW"),
   @Type(value = ConditionalGateway.class, name = "CONDITIONAL_GATEWAY"),
-  @Type(value = ParallelGateway.class, name = "PARALLEL_GATEWAY")
+  @Type(value = ParallelGatewayHead.class, name = "PARALLEL_GATEWAY")
 })
 public abstract class Component implements Serializable {
   @JsonIgnore private ComponentType componentType;

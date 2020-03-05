@@ -12,26 +12,18 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
 
-public class ConditionalGateway extends Gateway {
-  public ConditionalGateway() {
-    super(ComponentType.CONDITIONAL_GATEWAY);
+public class ParallelGatewayHead extends Gateway {
+  public ParallelGatewayHead() {
+    super(ComponentType.PARALLEL_GATEWAY);
   }
-
-  private String conditionDescription;
-  private Boolean goFirstFlow;
 
   @Override
   public ComponentData execute(WorkflowInstanceContext workflowInstanceContext) {
     LocalDateTime localDateTime = LocalDateTime.now();
     Map<String, Object> data = newHashMap();
     data.put("isFromGateway", Boolean.TRUE);
-    if (goFirstFlow) {
-      data.put("nextFlowId", Arrays.asList(this.getFirstFlowId()));
-    } else {
-      data.put("nextFlowId", Arrays.asList(this.getSecondFlowId()));
-    }
+    data.put("nextFlowId", Arrays.asList(this.getFirstFlowId(), this.getSecondFlowId()));
     this.setStatus(Status.SUCCESS);
-
     return new ComponentData(this.getId(), localDateTime, LocalDateTime.now(), true, data);
   }
 
