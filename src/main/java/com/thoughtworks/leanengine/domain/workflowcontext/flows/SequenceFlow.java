@@ -6,6 +6,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceC
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Flow;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +32,16 @@ public class SequenceFlow extends Flow {
 
   @Override
   public List<Component> nextComponent(Workflow workflow) {
-    return null;
+    List<Component> nextComponents = new ArrayList<>();
+    workflow
+        .getComponents()
+        .stream()
+        .forEach(
+            component -> {
+              if (component.getId().equalsIgnoreCase(this.getToComponentId())) {
+                nextComponents.add(component);
+              }
+            });
+    return nextComponents;
   }
 }

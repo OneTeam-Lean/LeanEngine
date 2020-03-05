@@ -10,6 +10,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Gateway;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,19 @@ public class ConditionalGateway extends Gateway {
 
   @Override
   public List<Component> nextComponent(Workflow workflow) {
-    return null;
+    List<Component> components = workflow.getComponents();
+    List<Component> nextComponents = new ArrayList<>();
+    components
+        .stream()
+        .forEach(
+            component -> {
+              if (goFirstFlow && component.getId().equalsIgnoreCase(this.getFirstFlowId())) {
+                nextComponents.add(component);
+              }
+              if (!goFirstFlow && component.getId().equalsIgnoreCase(this.getSecondFlowId())) {
+                nextComponents.add(component);
+              }
+            });
+    return nextComponents;
   }
 }
