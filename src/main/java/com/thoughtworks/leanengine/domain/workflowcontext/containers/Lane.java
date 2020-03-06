@@ -1,6 +1,6 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.containers;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Container;
+import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Container;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

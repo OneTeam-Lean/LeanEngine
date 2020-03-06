@@ -1,9 +1,10 @@
 package com.thoughtworks.leanengine.infra.repo.po.workflow;
 
+import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
+import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowExecution;
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowCouldNotBeNullException;
 import com.thoughtworks.leanengine.infra.repo.po.PersistenceObject;
@@ -19,7 +20,7 @@ import org.springframework.util.StringUtils;
 public class WorkflowPO implements PersistenceObject<Workflow> {
   @Id private String id;
   private String name;
-
+  private Status lastExecuteStatus;
   private List<Lane> lanes;
   private List<Component> components;
   private List<Diagram> diagrams;
@@ -41,6 +42,7 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
     workflowPO.setComponents(workflow.getComponents());
     workflowPO.setDiagrams(workflow.getDiagrams());
     workflowPO.setLanes(workflow.getLanes());
+    workflowPO.setLastExecuteStatus(workflow.getLastExecutionStatus());
     workflowPO.setWorkflowExecutions(workflow.getWorkflowExecutions());
     if (StringUtils.isEmpty(workflowPO.getId())) {
       workflowPO.setId(UUID.randomUUID().toString());

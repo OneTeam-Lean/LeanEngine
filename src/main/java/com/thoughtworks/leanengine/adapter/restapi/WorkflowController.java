@@ -1,5 +1,7 @@
 package com.thoughtworks.leanengine.adapter.restapi;
 
+import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowCreateRequestDTO;
+import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowUpdateRequestDTO;
 import com.thoughtworks.leanengine.application.WorkflowUserCase;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,12 @@ public class WorkflowController {
   }
 
   @PostMapping
-  public void saveWorkflow(@RequestBody Workflow workflow) {
-    workflowUserCase.saveWorkflow(workflow);
+  public String saveWorkflow(@RequestBody WorkflowCreateRequestDTO workflowRequestDTO) {
+    return workflowUserCase.saveWorkflow(workflowRequestDTO);
   }
 
   @PutMapping
-  public void updateWorkflow(@RequestBody Workflow workflow) {
-    workflowUserCase.updateWorkflow(workflow);
+  public void updateWorkflow(@RequestBody WorkflowUpdateRequestDTO workflowUpdateRequestDTO) {
+    workflowUserCase.updateWorkflow(workflowUpdateRequestDTO);
   }
 }

@@ -1,7 +1,6 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
+package com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
-import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import java.time.LocalDateTime;
 
 public abstract class Activity extends Component {
@@ -23,6 +22,5 @@ public abstract class Activity extends Component {
     this.name = name;
     this.startTime = startTime;
     this.endTime = endTime;
-    turnStatus(Status.PENDING);
   }
 }

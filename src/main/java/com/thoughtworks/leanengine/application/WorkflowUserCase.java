@@ -1,12 +1,12 @@
 package com.thoughtworks.leanengine.application;
 
+import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowCreateRequestDTO;
+import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowUpdateRequestDTO;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowService;
-import com.thoughtworks.leanengine.infra.common.exceptions.WhenCreateWorkflowItIdNotShouldBeExist;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNameExistException;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNotFoundException;
 import java.util.Objects;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,33 +21,29 @@ public class WorkflowUserCase {
     return workflowService.queryWorkflowByName(name);
   }
 
-  public void saveWorkflow(Workflow workflow) {
-    if (StringUtils.isNotEmpty(workflow.getId())) {
-      throw new WhenCreateWorkflowItIdNotShouldBeExist();
+  public String saveWorkflow(WorkflowCreateRequestDTO workflowRequestDTO) {
+    Workflow queryWorkflowByName =
+        workflowService.queryWorkflowByName(workflowRequestDTO.getName());
+    if (queryWorkflowByName != null) {
+      throw new WorkflowNameExistException();
     }
-    Workflow queryWorkflowByName = workflowService.queryWorkflowByName(workflow.getName());
-    checkNameDuplication(workflow, queryWorkflowByName);
-    workflowService.saveWorkflow(workflow);
+    return workflowService.saveWorkflow(workflowRequestDTO.toDomain());
   }
 
-  public void updateWorkflow(Workflow workflow) {
-    Workflow queryWorkflowById = workflowService.queryWorkflowById(workflow.getId());
+  public void updateWorkflow(WorkflowUpdateRequestDTO requestDTO) {
+    Workflow queryWorkflowById = workflowService.queryWorkflowById(requestDTO.getId());
     checkIdExistence(queryWorkflowById);
-    Workflow queryWorkflowByName = workflowService.queryWorkflowByName(workflow.getName());
-    checkNameDuplication(workflow, queryWorkflowByName);
-    workflowService.saveWorkflow(workflow);
+    Workflow queryWorkflowByName = workflowService.queryWorkflowByName(requestDTO.getName());
+    if (queryWorkflowByName != null
+        && !Objects.equals(requestDTO.getId(), queryWorkflowByName.getId())) {
+      throw new WorkflowNameExistException();
+    }
+    workflowService.updateWorkflow(requestDTO.toDomain());
   }
 
   private void checkIdExistence(Workflow queryWorkflowById) {
     if (queryWorkflowById == null) {
       throw new WorkflowNotFoundException();
-    }
-  }
-
-  private void checkNameDuplication(Workflow updateWorkflow, Workflow queryWorkflowByName) {
-    if (queryWorkflowByName != null
-        && !Objects.equals(updateWorkflow.getId(), queryWorkflowByName.getId())) {
-      throw new WorkflowNameExistException();
     }
   }
 }

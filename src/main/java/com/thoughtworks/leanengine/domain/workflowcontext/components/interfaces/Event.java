@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
+package com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import lombok.Getter;

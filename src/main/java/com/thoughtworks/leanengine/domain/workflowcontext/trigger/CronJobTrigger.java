@@ -1,21 +1,22 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.trigger;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceService;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowService;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
-@org.springframework.stereotype.Component
+@Component
 @Log4j2
 public class CronJobTrigger implements WorkflowTrigger {
 
-  @Autowired private WorkflowService workflowService;
+  private final WorkflowService workflowService;
 
-  @Autowired private WorkflowInstanceService instanceService;
+  public CronJobTrigger(WorkflowService workflowService) {
+    this.workflowService = workflowService;
+  }
 
   @Scheduled(fixedDelayString = "${cron.job.fixed.delay.seconds:600000}")
   @Override
@@ -29,7 +30,7 @@ public class CronJobTrigger implements WorkflowTrigger {
         .forEach(
             w -> {
               log.info("Triggered {} workflow to execute.", w.getId());
-              instanceService.runInstance(w);
+              w.execute();
             });
     log.info("Finished to trigger batch workflow to execute.", LocalDateTime.now());
   }

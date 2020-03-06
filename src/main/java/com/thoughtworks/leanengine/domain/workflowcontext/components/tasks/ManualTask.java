@@ -1,11 +1,11 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.tasks;
+package com.thoughtworks.leanengine.domain.workflowcontext.components.tasks;
 
 import static com.google.common.collect.Maps.newHashMap;
 
+import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Activity;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
-import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceContext;
-import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.ComponentExecutionData;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowExecution;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Random;
@@ -23,14 +23,19 @@ public class ManualTask extends Activity {
   }
 
   @Override
-  protected Map<String, Object> executeComponent(WorkflowInstanceContext workflowInstanceContext) {
-    turnStatus(Status.BLOCKED);
+  public ComponentExecutionData executeComponent(WorkflowExecution workflowExecution) {
     Map<String, Object> data = newHashMap();
-    while (!isTriggered) {}
+    if (!isTriggered) {
+      try {
+        Thread.sleep(30000L);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      return ComponentExecutionData.createBlockData();
+    }
     Random random = new Random();
     Integer randomNumber = random.nextInt(100);
     data.put("randomNumber", randomNumber);
-    turnStatus(Status.SUCCESS);
-    return data;
+    return ComponentExecutionData.createSuccessData(data);
   }
 }

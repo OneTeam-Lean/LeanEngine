@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.interfaces;
+package com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
