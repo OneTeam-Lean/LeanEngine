@@ -97,16 +97,16 @@ class SequenceFlow{
 }
  Flow <|-- SequenceFlow
 
-  Lane                  "0..*"<--*"0..1" Workflow
-  SequenceFlow          "0..*"<--*"0..1" Workflow
-  StartEvent            "0..*"<--*"0..1" Workflow
-  EndEvent              "0..*"<--*"0..1" Workflow
-  IntermediateEvent     "0..*"<--*"0..1" Workflow
-  AutoTask              "0..*"<--*"0..1" Workflow
-  ManualTask            "0..*"<--*"0..1" Workflow
-  InclusiveGateway      "0..*"<--*"0..1" Workflow
-  ExclusiveGateway      "0..*"<--*"0..1" Workflow
-  ParallelGateway       "0..*"<--*"0..1" Workflow
+  Lane                  "0..*" <--o "0..1" Workflow
+  SequenceFlow          "0..*" <--o "0..1" Workflow
+  StartEvent            "0..*" <--o "0..1" Workflow
+  EndEvent              "0..*" <--o "0..1" Workflow
+  IntermediateEvent     "0..*" <--o "0..1" Workflow
+  AutoTask              "0..*" <--o "0..1" Workflow
+  ManualTask            "0..*" <--o "0..1" Workflow
+  InclusiveGateway      "0..*" <--o "0..1" Workflow
+  ExclusiveGateway      "0..*" <--o "0..1" Workflow
+  ParallelGateway       "0..*" <--o "0..1" Workflow
 
 }
 
