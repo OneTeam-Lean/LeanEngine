@@ -1,11 +1,14 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.tasks;
 
+import static com.google.common.collect.Maps.newHashMap;
+
 import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Random;
 
 public class ManualTask extends Activity {
   private String triggeredBy;
@@ -22,9 +25,12 @@ public class ManualTask extends Activity {
   @Override
   protected Map<String, Object> executeComponent(WorkflowInstanceContext workflowInstanceContext) {
     turnStatus(Status.BLOCKED);
-    while (!isTriggered) {
-      turnStatus(Status.SUCCESS);
-    }
-    return null;
+    Map<String, Object> data = newHashMap();
+    while (!isTriggered) {}
+    Random random = new Random();
+    Integer randomNumber = random.nextInt(100);
+    data.put("randomNumber", randomNumber);
+    turnStatus(Status.SUCCESS);
+    return data;
   }
 }

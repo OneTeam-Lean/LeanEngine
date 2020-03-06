@@ -6,7 +6,6 @@ import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceC
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Gateway;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -15,16 +14,25 @@ public class ConditionalGateway extends Gateway {
     super(ComponentType.CONDITIONAL_GATEWAY);
   }
 
-  private String conditionDescription; // Fixme:no user.
-  private Boolean goFirstFlow;
+  private String fromComponentId;
+
+  public ConditionalGateway(String fromComponentId) {
+    super(ComponentType.CONDITIONAL_GATEWAY);
+    this.fromComponentId = fromComponentId;
+  }
 
   @Override
   protected Map<String, Object> executeComponent(WorkflowInstanceContext workflowInstanceContext) {
-    LocalDateTime localDateTime = LocalDateTime.now();
     Map<String, Object> data = newHashMap();
-    data.put("isFromGateway", Boolean.TRUE);
-    if (goFirstFlow) {
+    Integer result =
+        (Integer)
+            workflowInstanceContext
+                .getComponentDataById(fromComponentId)
+                .getData()
+                .get("randomNumber");
+    if (result == null || result > 50) {
       data.put("nextFlowId", Arrays.asList(this.getFirstFlowId()));
+
     } else {
       data.put("nextFlowId", Arrays.asList(this.getSecondFlowId()));
     }
