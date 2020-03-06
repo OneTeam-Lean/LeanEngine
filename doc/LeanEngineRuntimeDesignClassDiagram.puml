@@ -1,64 +1,57 @@
 @startuml
 
 interface WorkflowTrigger{
-  void execute(WorkflowContext);
+  void trigger()
 }
 
+Class WorkflowExecution{
+    LocalDateTime startTime
+    LocalDateTime endTime
+    String id
+    WorkflowResult executeResult
+}
+
+class Workflow{
+    WorkflowExecutionStatus status
+    LocalDateTime startupTime;
+    LocalDateTime lastRunTime;
+    LocalDateTime endTime;
+    Component lastRunComponent;
+    void execute()
+}
+
+class ComponentResult{
+    String name;
+    String componentPath;
+    KeyValuePair data;
+}
+
+'Abstract Class Activity{
+'    String name
+'    LocalDateTime startTime
+'    LocalDateTime endTime
+'    ActivityStatus status
+'}
+
+WorkflowExecution *--> WorkflowResult
+WorkflowResult "1" *--> "[1..N]" ComponentResult
+
+Workflow "1" o--> "0...*" WorkflowExecution
+'Activity "1" *-->  "[1...*]" Job
+
+'Job *--> WorkflowContext
+'Job *--> WorkflowResult
+
+'WorkflowRuntimeEngine *--> WorkflowInstanceScheduler
+'WorkflowRuntimeEngine *-> Job
+
+Workflow *--> WorkflowTrigger
 
 WorkflowTrigger <|.. CommandJobTrigger
 WorkflowTrigger <|.. CronJobTrigger
 WorkflowTrigger <|.. ComponentEventTrigger
 WorkflowTrigger <|.. ComponentStatusTrigger
 
-WorkflowTrigger *-->  WorkflowInstanceScheduler
-
-Class WorkflowRuntimeEngine
-
-Class WorkflowInstanceScheduler
-
-WorkflowRuntimeEngine *--> WorkflowInstanceScheduler
-WorkflowRuntimeEngine *-> Job
-
-WorkflowInstanceScheduler *--> WorkflowInstance
-
-Class WorkflowInstance{
-    InstanceStatus status
-    LocalDateTime startupTime;
-    LocalDateTime lastRunTime;
-    LocalDateTime endTime;
-    Component lastRunComponent;
-    WorkflowInstanceResult result;
-}
-
-WorkflowInstanceResult "1" *--> "[1..N]" ComponentResult
-class ComponentResult{
-    Sting name;
-    Stirng componentPath;
-    KeyValuePair data;
-}
-
-WorkflowInstance *--> Workflow
-
-Abstract Class Activity{
-    String name
-    LocalDateTime startTime
-    LocalDateTime endTime
-    ActivityStatus status
-}
-
-Class WorkflowContext{
-    ComponentResult read(componentPath)
-    void write(componentPath, ComponentResult)
-}
-
-interface Job{
-    void execute(WorflowContext)
-}
-
-Activity "1" *-->  "[1...*]" Job
-
-Job *--> WorkflowContext
-Job *--> WorkflowInstanceResult
-
+'WorkflowTrigger *-->  WorkflowInstanceScheduler
 
 @enduml
