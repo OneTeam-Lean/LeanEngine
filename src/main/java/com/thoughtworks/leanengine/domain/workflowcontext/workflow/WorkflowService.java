@@ -2,7 +2,9 @@ package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
 import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,5 +30,13 @@ public class WorkflowService {
   public Workflow queryWorkflowById(String id) {
     Optional<WorkflowPO> workflowPO = workflowRepository.findById(id);
     return workflowPO.map(WorkflowPO::toDomainModel).orElse(null);
+  }
+
+  public List<Workflow> queryAllWorkflow() {
+    return workflowRepository
+        .findAll()
+        .stream()
+        .map(WorkflowPO::toDomainModel)
+        .collect(Collectors.toList());
   }
 }
