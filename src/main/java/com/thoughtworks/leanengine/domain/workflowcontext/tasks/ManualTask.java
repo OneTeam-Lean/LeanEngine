@@ -2,9 +2,9 @@ package com.thoughtworks.leanengine.domain.workflowcontext.tasks;
 
 import static com.google.common.collect.Maps.newHashMap;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Activity;
 import java.time.LocalDateTime;
 import java.util.Map;

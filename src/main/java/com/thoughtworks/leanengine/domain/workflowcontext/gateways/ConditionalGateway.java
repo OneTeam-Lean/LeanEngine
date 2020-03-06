@@ -2,9 +2,9 @@ package com.thoughtworks.leanengine.domain.workflowcontext.gateways;
 
 import static com.google.common.collect.Maps.newHashMap;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Gateway;
 import java.util.Arrays;
 import java.util.Map;

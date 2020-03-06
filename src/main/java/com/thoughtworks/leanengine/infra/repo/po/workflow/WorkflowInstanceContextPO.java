@@ -2,8 +2,8 @@ package com.thoughtworks.leanengine.infra.repo.po.workflow;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.data.ComponentData;
-import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.ComponentData;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.infra.repo.po.PersistenceObject;
 import java.util.List;
 import org.springframework.data.annotation.Id;

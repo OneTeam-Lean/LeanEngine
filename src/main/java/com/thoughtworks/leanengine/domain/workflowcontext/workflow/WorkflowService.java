@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.containers;
+package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
 import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;

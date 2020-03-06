@@ -1,7 +1,7 @@
 package com.thoughtworks.leanengine.application;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.WorkflowService;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowService;
 import com.thoughtworks.leanengine.infra.common.exceptions.WhenCreateWorkflowItIdNotShouldBeExist;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNameExistException;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNotFoundException;

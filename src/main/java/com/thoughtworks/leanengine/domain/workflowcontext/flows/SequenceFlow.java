@@ -1,7 +1,7 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.flows;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Flow;
 import java.util.Map;
 import java.util.UUID;

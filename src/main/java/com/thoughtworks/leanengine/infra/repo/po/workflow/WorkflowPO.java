@@ -1,9 +1,10 @@
 package com.thoughtworks.leanengine.infra.repo.po.workflow;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowExecution;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Component;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowCouldNotBeNullException;
 import com.thoughtworks.leanengine.infra.repo.po.PersistenceObject;
 import java.util.List;
@@ -22,10 +23,12 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
   private List<Lane> lanes;
   private List<Component> components;
   private List<Diagram> diagrams;
+  private List<WorkflowExecution> workflowExecutions;
 
   @Override
   public Workflow toDomainModel() {
-    return new Workflow(this.name, this.id, this.lanes, this.components, this.diagrams);
+    return new Workflow(
+        this.name, this.id, this.lanes, this.components, this.diagrams, this.workflowExecutions);
   }
 
   public static WorkflowPO of(Workflow workflow) {
@@ -38,6 +41,7 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
     workflowPO.setComponents(workflow.getComponents());
     workflowPO.setDiagrams(workflow.getDiagrams());
     workflowPO.setLanes(workflow.getLanes());
+    workflowPO.setWorkflowExecutions(workflow.getWorkflowExecutions());
     if (StringUtils.isEmpty(workflowPO.getId())) {
       workflowPO.setId(UUID.randomUUID().toString());
     }

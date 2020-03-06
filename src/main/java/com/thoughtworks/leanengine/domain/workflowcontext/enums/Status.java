@@ -5,6 +5,5 @@ public enum Status {
   FAILED,
   BLOCKED,
   PENDING,
-  CANCELED,
-  NOT_STARTED
+  CANCELED;
 }

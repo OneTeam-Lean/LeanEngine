@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.thoughtworks.leanengine.ApiTestBase;
-import com.thoughtworks.leanengine.domain.workflowcontext.data.ComponentData;
-import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.ComponentData;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowInstanceContextPO;
 import java.time.LocalDateTime;
 import java.util.Date;

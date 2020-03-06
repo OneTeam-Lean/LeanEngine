@@ -1,7 +1,7 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.events;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.data.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceContext;
 import com.thoughtworks.leanengine.domain.workflowcontext.interfaces.Event;
 import java.util.List;
 import java.util.Map;

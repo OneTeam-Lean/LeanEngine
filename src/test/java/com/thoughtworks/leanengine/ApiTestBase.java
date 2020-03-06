@@ -5,7 +5,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Edge;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Position;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Shape;
@@ -15,6 +14,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.events.StartEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.flows.SequenceFlow;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.tasks.ManualTask;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;
 import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository;
 import io.restassured.RestAssured;
@@ -99,7 +99,8 @@ public class ApiTestBase {
 
   protected String getWorkflowJson(String workflowName) throws JsonProcessingException {
     Workflow workflow =
-        new Workflow(workflowName, null, newArrayList(), newArrayList(), newArrayList());
+        new Workflow(
+            workflowName, null, newArrayList(), newArrayList(), newArrayList(), newArrayList());
     return objectMapper.writeValueAsString(workflow);
   }
 

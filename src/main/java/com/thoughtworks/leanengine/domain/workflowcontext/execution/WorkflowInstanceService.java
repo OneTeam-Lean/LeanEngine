@@ -1,6 +1,6 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.instance;
+package com.thoughtworks.leanengine.domain.workflowcontext.execution;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Workflow;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNotFoundException;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowInstanceContextPO;
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO;

@@ -1,6 +1,6 @@
 package com.thoughtworks.leanengine.application;
 
-import com.thoughtworks.leanengine.domain.workflowcontext.instance.WorkflowInstanceService;
+import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowInstanceService;
 import org.springframework.stereotype.Component;
 
 @Component
