@@ -3,8 +3,8 @@ package com.thoughtworks.leanengine.domain.workflowcontext.components.gateways;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Gateway;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.ComponentExecutionData;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowExecution;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.ComponentExecutionData;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import java.util.List;
 
 public class ParallelGatewayTail extends Gateway {

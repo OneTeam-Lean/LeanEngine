@@ -4,8 +4,8 @@ import static com.google.common.collect.Maps.newHashMap;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Activity;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.ComponentExecutionData;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowExecution;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.ComponentExecutionData;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Random;

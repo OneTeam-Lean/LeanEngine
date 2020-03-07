@@ -1,13 +1,12 @@
 @startuml
 package workflowcontext.workflow{
- abstract class Component {
- - componentType:ComponentType
- - createDate:LocalDateTime
- - version:Version
-}
 
-abstract class Container {
-    - containerName:String
+
+package components{
+ abstract class Component {
+ - id:String
+ - componentType:ComponentType
+ - nextComponentIds:List<String>
 }
 abstract class Flow {
     - flowComment:String
@@ -27,21 +26,30 @@ enum ComponentType{
   INTERMEDIATE_EVENT
   AUTO_TASK
   MANUAL_TASK
-}
-class Version{
-    - id
-    - fromVersion
-    - toVersion
-    - createDate
+
 }
   Component <|-- Flow
   Component <|-- Event
   Component <|-- Activity
   Component <|-- Gateway
-  Component <|-- Container
   ComponentType "1"-*"1" Component
-  Component "1"*-"1" Version
+}
 
+
+package Container{
+abstract class Container {
+    - containerName:String
+}
+
+
+  Container <|-- Workflow
+class Lane{
+    - id
+    - componentIds
+}
+  Container <|-- Lane
+}
+package workflow{
 class Workflow {
     - id
     - components
@@ -49,12 +57,9 @@ class Workflow {
     - diagrams
     - runId
 }
-  Container <|-- Workflow
-class Lane{
-    - id
-    - componentIds
 }
-  Container <|-- Lane
+
+
 class StartEvent{
 
 }

@@ -9,8 +9,8 @@ import com.thoughtworks.leanengine.domain.workflowcontext.components.events.Star
 import com.thoughtworks.leanengine.domain.workflowcontext.components.flows.SequenceFlow;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.tasks.ManualTask;
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Edge;
+import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Position;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Shape;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Size;

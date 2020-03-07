@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.execution;
+package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Component;

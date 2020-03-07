@@ -2,8 +2,8 @@ package com.thoughtworks.leanengine.adapter.restapi.dto;
 
 import com.thoughtworks.leanengine.adapter.DataTransferObject;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Component;
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
+import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import java.util.List;
 import lombok.Getter;

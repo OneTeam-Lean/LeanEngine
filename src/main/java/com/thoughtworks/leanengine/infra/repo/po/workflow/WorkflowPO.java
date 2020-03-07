@@ -1,11 +1,11 @@
 package com.thoughtworks.leanengine.infra.repo.po.workflow;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Component;
-import com.thoughtworks.leanengine.domain.workflowcontext.containers.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
+import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowExecution;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowCouldNotBeNullException;
 import com.thoughtworks.leanengine.infra.repo.po.PersistenceObject;
 import java.util.List;

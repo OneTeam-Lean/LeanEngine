@@ -1,4 +1,4 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.execution;
+package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.BLOCKED;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.FAILED;

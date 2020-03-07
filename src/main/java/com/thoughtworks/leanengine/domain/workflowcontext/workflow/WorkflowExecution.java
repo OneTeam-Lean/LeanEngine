@@ -1,10 +1,9 @@
-package com.thoughtworks.leanengine.domain.workflowcontext.execution;
+package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
-import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;

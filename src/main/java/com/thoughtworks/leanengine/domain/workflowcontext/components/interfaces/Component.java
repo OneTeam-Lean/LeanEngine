@@ -15,8 +15,8 @@ import com.thoughtworks.leanengine.domain.workflowcontext.components.gateways.Pa
 import com.thoughtworks.leanengine.domain.workflowcontext.components.tasks.AutoTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.tasks.ManualTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.ComponentExecutionData;
-import com.thoughtworks.leanengine.domain.workflowcontext.execution.WorkflowExecution;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.ComponentExecutionData;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Getter;
