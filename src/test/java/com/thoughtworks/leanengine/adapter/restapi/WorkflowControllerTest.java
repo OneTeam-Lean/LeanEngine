@@ -43,7 +43,6 @@ public class WorkflowControllerTest extends ApiTestBase {
     workflowPO.setId("testWorkflowId");
     workflowPO.setName("putTest");
     repo.save(workflowPO);
-    WorkflowPO save = repo.save(workflowPO);
     WorkflowPO putTest = buildWorkflowPO("putTest");
     putTest.setId("testWorkflowId");
     given()

@@ -51,8 +51,8 @@ public class WorkflowService {
     Workflow originWorkflow = workflowPO.get().toDomainModel();
     Workflow mergedWorkflow =
         new Workflow(
-            originWorkflow.getId(),
             updatedWorkflow.getName(),
+            originWorkflow.getId(),
             updatedWorkflow.getLanes(),
             updatedWorkflow.getComponents(),
             updatedWorkflow.getDiagrams(),
