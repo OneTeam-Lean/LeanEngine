@@ -1,159 +1,214 @@
 @startuml
 package workflowcontext.workflow{
 
+package workflow {
+class Workflow  <<Entity>> {
+  - String id
+  - String name
+  - Status lastExecutionStatus
+  - List<lanes> lanes
+  - List<Component> components
+  - List<Diagram> diagrams
+  - List<WorkflowExecution> workflowExecutions
+  + boolean isLastExecutionCompleted()
+  + Status execute()
+}
+
+class WorkflowExecution <<Value Object>>{
+  - String id
+  - String workflowId
+  - LocalDateTime startDateTime
+  - LocalDateTime endDateTime
+  - Status workflowExecutionStatus
+  - List<ComponentExecution> componentExecutions
+  - Map<String, ComponentExecution> componentMap
+  - void turnExecutionToSuccessStatus()
+  - void turnExecutionToFailedStatus()
+  + ComponentExecution getComponentExecutionById()
+  + ComponentExecutionData getComponentExecutionData()
+  + Status getComponentExecutedStatus()
+  + Status execute()
+
+}
+
+class ComponentExecution <<Value Object>>{
+  - String componentId
+  - LocalDateTime startDateTime
+  - LocalDateTime endDateTime
+  - Component component
+  - ComponentExecutionData componentExecutionData
+  + ComponentExecution of(Component component)
+  + ComponentData getData(String key)
+  + void updateData(
+      LocalDateTime startDateTime, LocalDateTime endDateTime, ComponentExecutionData data)
+  + Status getStatus()
+  + void execute(WorkflowExecution workflowExecution)
+  + void updateExecuteFailed(LocalDateTime startDateTime, LocalDateTime endDateTime)
+  + boolean isBlocked()
+  + boolean isCompleted()
+}
+
+class ComponentData <<Value Object>>{
+  - Status componentExecutionStatus
+  - ImmutableMap<String, Object> data
+  +  ComponentExecutionData createFailedData()
+  +  ComponentExecutionData createRunningData()
+  +  ComponentExecutionData createSuccessAndEmptyData()
+  +  ComponentExecutionData createSuccessData(Map<String, Object> data)
+  +  ComponentExecutionData createBlockData()
+}
+enum Status{
+    PENDING
+    RUNNING
+    FAILED
+    SUCCESS
+    BLOCKED
+    CANCELED
+    + boolean isCompletedStatus()
+    + boolean isValidExecutedStatus()
+}
+Status <--* Workflow
+Status <--* WorkflowExecution
+Status <--* ComponentData
+Workflow "1"*-->"0...*" WorkflowExecution
+WorkflowExecution "1"*-->"0...*" ComponentExecution
+ComponentExecution "1"*-->"1" ComponentData
+
+
+}
+
 
 package components{
  abstract class Component {
- - id:String
- - componentType:ComponentType
- - nextComponentIds:List<String>
-}
-abstract class Flow {
-    - flowComment:String
-}
-abstract class Event {
-}
-abstract class Activity {
-}
-abstract class Gateway {
+  - ComponentType componentType
+  - String id
+  - String name
+  - LocalDateTime startTime
+  - LocalDateTime endTime
+  - List<String> nextComponentIds
+  + ComponentExecutionData executeComponent()
 }
 enum ComponentType{
-  WORKFLOW
-  LANE
   SEQUENCE_FLOW
   START_EVENT
   END_EVENT
   INTERMEDIATE_EVENT
   AUTO_TASK
   MANUAL_TASK
+  INCLUSIVE_GATEWAY
+  EXCLUSIVE_GATEWAY
+  PARALLELG_ATEWAY
+}
+ComponentType <--* Component
 
+abstract class Flow {
+    - String sourceComponentId
+    - String targetComponentId
 }
-  Component <|-- Flow
-  Component <|-- Event
-  Component <|-- Activity
-  Component <|-- Gateway
-  ComponentType "1"-*"1" Component
+abstract class Event {
 }
-
-
-package Container{
-abstract class Container {
-    - containerName:String
+abstract class Activity {
 }
-
-
-  Container <|-- Workflow
-class Lane{
-    - id
-    - componentIds
-}
-  Container <|-- Lane
-}
-package workflow{
-class Workflow {
-    - id
-    - components
-    - lanes
-    - diagrams
-    - runId
-}
+abstract class Gateway {
+    - List<String> sourceComponentId
+    - List<String> targetComponentId
 }
 
-
-class StartEvent{
+  Component <|.. Flow
+  Component <|.. Event
+  Component <|.. Activity
+  Component <|.. Gateway
+class StartEvent<<Value Object>>{
 
 }
-class EndEvent{
+class EndEvent<<Value Object>>{
 
 }
-class IntermediateEvent{
+class IntermediateEvent<<Value Object>>{
 
 }
   Event <|-- StartEvent
   Event <|-- IntermediateEvent
   Event <|-- EndEvent
 
-class AutoTask{
+class AutoTask<<Value Object>>{
 
 }
-class ManualTask{
+class ManualTask<<Value Object>>{
 
 }
 
  Activity <|-- AutoTask
  Activity <|-- ManualTask
 
-class InclusiveGateway{
+class ConditionalGateway<<Value Object>>{
 
 }
-class ExclusiveGateway{
+class ParallelGatewayHead<<Value Object>>{
 
 }
-class ParallelGateway{
-
+class ParallelGatewayTail<<Value Object>>{
+  -List<String> fromComponentsIds
 }
- Gateway <|-- InclusiveGateway
- Gateway <|-- ExclusiveGateway
- Gateway <|-- ParallelGateway
+ Gateway <|-- ConditionalGateway
+ Gateway <|-- ParallelGatewayHead
+ Gateway <|-- ParallelGatewayTail
 
-class SequenceFlow{
+class SequenceFlow<<Value Object>>{
     - fromComponentId
     - toComponentId
 }
  Flow <|-- SequenceFlow
 
-  Lane                  "0..*" <--o "0..1" Workflow
-  SequenceFlow          "0..*" <--o "0..1" Workflow
-  StartEvent            "0..*" <--o "0..1" Workflow
-  EndEvent              "0..*" <--o "0..1" Workflow
-  IntermediateEvent     "0..*" <--o "0..1" Workflow
-  AutoTask              "0..*" <--o "0..1" Workflow
-  ManualTask            "0..*" <--o "0..1" Workflow
-  InclusiveGateway      "0..*" <--o "0..1" Workflow
-  ExclusiveGateway      "0..*" <--o "0..1" Workflow
-  ParallelGateway       "0..*" <--o "0..1" Workflow
+ Workflow "1" *--> "0...*" Component
 
+ Component ..> WorkflowExecution
+ note on link : 封装暴露了?
 }
 
 
-package workflowcontext.diagram{
+package diagram{
 
 abstract class Diagram{
     - diagramType
 }
-enum DiagramType{
-    SHAPE
-    EDGE
-}
 
-class Shape <<Value>>{
+
+class Shape <<Value Object>>{
     - componentId
     - size
     - position
 }
-class Edge<<Value>>{
+class Edge<<Value Object>>{
     - fromComponentId
     - toComponentId
     - fromAnchor
     - toAnchor
 }
-
-class Size<<Value>>{
+class Lane<<Value Object>>{
+    - id
+    - name
+    - componentIds
+}
+class Size<<Value Object>>{
     - height
     - width
 }
-class Position<<Value>>{
+class Position<<Value Object>>{
     - x
     - y
 }
-
+enum DiagramType{
+    SHAPE
+    EDGE
+}
 enum Anchor{
     First
     Second
     Third
     Fourth
 }
- DiagramType <-* Diagram
+ DiagramType <--* Diagram
 
  Diagram <|-- Shape
  Diagram <|-- Edge
@@ -162,7 +217,10 @@ enum Anchor{
  Shape *--> Position
 
  Edge *--> Anchor
+ Workflow "1" *--> "0...*" Diagram
+
+ Workflow "1" *-->"0...*"Lane
 }
 
- Workflow "0..1"*-->"0..*" Diagram
+}
 @enduml
