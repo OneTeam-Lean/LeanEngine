@@ -4,7 +4,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import java.time.LocalDateTime;
 
 public abstract class Activity extends Component {
-  private String name;
+  private String name; // Fixme:这些属性看起来是每个组件都需要的
   private LocalDateTime startTime;
   private LocalDateTime endTime;
 

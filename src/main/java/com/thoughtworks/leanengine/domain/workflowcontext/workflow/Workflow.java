@@ -7,14 +7,12 @@ import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.CollectionUtils;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Workflow {
   private String id;
   private String name;
@@ -68,7 +66,8 @@ public class Workflow {
     return Status.isCompletedStatus(status);
   }
 
-  private Status getLastExecutedStatus() {
+  @JsonIgnore
+  public Status getLastExecutedStatus() {
     if (CollectionUtils.isEmpty(workflowExecutions)) {
       return null;
     }

@@ -53,7 +53,6 @@ public class WorkflowService {
         new Workflow(
             originWorkflow.getId(),
             updatedWorkflow.getName(),
-            originWorkflow.getLastExecutionStatus(),
             updatedWorkflow.getLanes(),
             updatedWorkflow.getComponents(),
             updatedWorkflow.getDiagrams(),

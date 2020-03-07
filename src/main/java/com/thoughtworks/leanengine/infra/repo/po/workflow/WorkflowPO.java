@@ -42,7 +42,7 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
     workflowPO.setComponents(workflow.getComponents());
     workflowPO.setDiagrams(workflow.getDiagrams());
     workflowPO.setLanes(workflow.getLanes());
-    workflowPO.setLastExecuteStatus(workflow.getLastExecutionStatus());
+    workflowPO.setLastExecuteStatus(workflow.getLastExecutedStatus());
     workflowPO.setWorkflowExecutions(workflow.getWorkflowExecutions());
     if (StringUtils.isEmpty(workflowPO.getId())) {
       workflowPO.setId(UUID.randomUUID().toString());
