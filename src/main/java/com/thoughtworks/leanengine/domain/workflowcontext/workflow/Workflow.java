@@ -18,7 +18,6 @@ import org.springframework.util.CollectionUtils;
 public class Workflow {
   private String id;
   private String name;
-  private Status lastExecutionStatus;
   private List<Lane> lanes;
   private List<Component> components;
   private List<Diagram> diagrams;
@@ -41,12 +40,6 @@ public class Workflow {
     }
     this.diagrams = diagrams;
     this.workflowExecutions = executions;
-    if (CollectionUtils.isEmpty(workflowExecutions)) {
-      lastExecutionStatus = Status.PENDING;
-    } else {
-      lastExecutionStatus =
-          workflowExecutions.get(workflowExecutions.size() - 1).getWorkflowExecutionStatus();
-    }
   }
 
   public Workflow(
@@ -68,13 +61,23 @@ public class Workflow {
 
   @JsonIgnore
   public boolean isLastExecutionCompleted() {
-    return Status.isCompletedStatus(lastExecutionStatus);
+    Status status = getLastExecutedStatus();
+    if (status == null) {
+      return false;
+    }
+    return Status.isCompletedStatus(status);
+  }
+
+  private Status getLastExecutedStatus() {
+    if (CollectionUtils.isEmpty(workflowExecutions)) {
+      return null;
+    }
+    return workflowExecutions.get(workflowExecutions.size() - 1).getWorkflowExecutionStatus();
   }
 
   public Status execute() {
     WorkflowExecution workflowExecution = new WorkflowExecution(this);
     this.workflowExecutions.add(workflowExecution);
-    this.lastExecutionStatus = workflowExecution.execute();
-    return this.lastExecutionStatus;
+    return workflowExecution.execute();
   }
 }
