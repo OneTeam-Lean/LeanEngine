@@ -22,6 +22,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,14 +63,23 @@ public class ApiTestBase {
     WorkflowPO workflowPO = new WorkflowPO();
     workflowPO.setComponents(
         newArrayList(
-            new StartEvent("startEventId", "startEvent"),
-            new SequenceFlow("sequenceFlowId_1", "startEventId", "autoTaskId"),
-            new AutoTask("autoTaskId", "taskName", LocalDateTime.now(), LocalDateTime.now()),
-            new SequenceFlow("sequenceFlowId_2", "autoTaskId", "manualTaskId"),
+            new StartEvent("startEventId", "startEvent", Arrays.asList("sequenceFlowId_1")),
+            new SequenceFlow("sequenceFlowId_1", "startEventId", Arrays.asList("autoTaskId")),
+            new AutoTask(
+                "autoTaskId",
+                "taskName",
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                Arrays.asList("sequenceFlowId_2")),
+            new SequenceFlow("sequenceFlowId_2", "autoTaskId", Arrays.asList("manualTaskId")),
             new ManualTask(
-                "manualTaskId", "manualTaskName", LocalDateTime.now(), LocalDateTime.now()),
-            new SequenceFlow("sequenceFlowId_3", "manualTaskId", "endEventId"),
-            new EndEvent("endEventId", "endEvent")));
+                "manualTaskId",
+                "manualTaskName",
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                Arrays.asList("sequenceFlowId_3")),
+            new SequenceFlow("sequenceFlowId_3", "manualTaskId", Arrays.asList("endEventId")),
+            new EndEvent("endEventId", "endEvent", null)));
     workflowPO.setName(name);
     workflowPO.setDiagrams(
         newArrayList(

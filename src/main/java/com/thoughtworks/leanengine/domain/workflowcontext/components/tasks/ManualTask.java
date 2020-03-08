@@ -7,6 +7,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.ComponentExecutionData;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -18,8 +19,13 @@ public class ManualTask extends Activity {
     super(ComponentType.MANUAL_TASK);
   }
 
-  public ManualTask(String id, String name, LocalDateTime startTime, LocalDateTime endTime) {
-    super(ComponentType.MANUAL_TASK, id, name, startTime, endTime);
+  public ManualTask(
+      String id,
+      String name,
+      LocalDateTime startTime,
+      LocalDateTime endTime,
+      List<String> nextComponentIds) {
+    super(ComponentType.MANUAL_TASK, id, name, nextComponentIds, startTime, endTime);
   }
 
   @Override

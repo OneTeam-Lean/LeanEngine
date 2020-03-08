@@ -1,7 +1,5 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
@@ -36,13 +34,13 @@ import lombok.Getter;
 public class Component implements Serializable {
   @JsonIgnore private ComponentType componentType;
   private String id;
-  private List<String> nextComponentIds = newArrayList();
+  private List<String> nextComponentIds;
 
   public Component(ComponentType componentType) {
     this.componentType = componentType;
   }
 
-  public Component(String id, ComponentType componentType) {
+  public Component(String id, ComponentType componentType, List<String> nextComponentIds) {
     this.id = id;
     this.componentType = componentType;
   }
