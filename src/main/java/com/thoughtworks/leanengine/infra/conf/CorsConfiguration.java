@@ -12,12 +12,7 @@ public class CorsConfiguration {
     return new WebMvcConfigurer() {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
-        registry
-            .addMapping("/workflow")
-            .allowedOrigins(
-                "http://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9003",
-                "http://localhost:8080",
-                "http://localhost:3000");
+        registry.addMapping("/**");
       }
     };
   }
