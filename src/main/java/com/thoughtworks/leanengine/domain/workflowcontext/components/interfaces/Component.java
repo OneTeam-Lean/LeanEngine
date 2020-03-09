@@ -18,6 +18,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecu
 import java.io.Serializable;
 import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "componentType")
 @JsonSubTypes({
@@ -31,6 +32,7 @@ import lombok.Getter;
   @Type(value = ParallelGatewayHead.class, name = "PARALLEL_GATEWAY")
 })
 @Getter
+@NoArgsConstructor
 public class Component implements Serializable {
   @JsonIgnore private ComponentType componentType;
   private String id;
