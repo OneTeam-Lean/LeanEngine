@@ -7,7 +7,6 @@ import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.Getter;
@@ -17,8 +16,6 @@ import org.springframework.util.CollectionUtils;
 @Getter
 @NoArgsConstructor
 public class WorkflowExecution {
-  private String id;
-  private String workflowId;
   private LocalDateTime startDateTime;
   private LocalDateTime endDateTime;
   private Status workflowExecutionStatus;
@@ -26,9 +23,7 @@ public class WorkflowExecution {
   @JsonIgnore private Map<String, ComponentExecution> componentMap;
 
   public WorkflowExecution(Workflow workflow) {
-    this.id = UUID.randomUUID().toString();
     this.workflowExecutionStatus = Status.RUNNING;
-    this.workflowId = workflow.getId();
     this.componentExecutions =
         workflow.getComponents().stream().map(ComponentExecution::of).collect(Collectors.toList());
     if (!CollectionUtils.isEmpty(workflow.getComponents())) {
