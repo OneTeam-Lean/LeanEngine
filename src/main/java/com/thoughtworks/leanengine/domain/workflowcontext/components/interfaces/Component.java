@@ -37,6 +37,7 @@ public class Component implements Serializable {
   @JsonIgnore private ComponentType componentType;
   private String id;
   private List<String> nextComponentIds;
+  private String name;
 
   public Component(ComponentType componentType) {
     this.componentType = componentType;
@@ -50,5 +51,9 @@ public class Component implements Serializable {
 
   public ComponentExecutionData executeComponent(WorkflowExecution workflowExecution) {
     return ComponentExecutionData.createSuccessAndEmptyData();
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }

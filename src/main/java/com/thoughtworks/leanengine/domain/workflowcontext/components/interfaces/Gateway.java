@@ -7,7 +7,6 @@ import lombok.Getter;
 public abstract class Gateway extends Component {
   private String firstFlowId;
   private String secondFlowId;
-  private String name;
 
   public Gateway(ComponentType componentType) {
     super(componentType);
@@ -18,6 +17,6 @@ public abstract class Gateway extends Component {
     super(componentType);
     this.firstFlowId = firstFlowId;
     this.secondFlowId = secondFlowId;
-    this.name = name;
+    setName(name);
   }
 }
