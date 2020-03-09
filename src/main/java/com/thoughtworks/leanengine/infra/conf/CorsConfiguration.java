@@ -15,8 +15,8 @@ public class CorsConfiguration {
         registry
             .addMapping("/workflow")
             .allowedOrigins(
-                "http://http://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9003",
-                "localhost:8080");
+                "http://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9003",
+                "http://localhost:8080");
       }
     };
   }
