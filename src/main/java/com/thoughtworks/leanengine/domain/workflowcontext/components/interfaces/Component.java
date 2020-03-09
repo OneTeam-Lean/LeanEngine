@@ -43,6 +43,7 @@ public class Component implements Serializable {
   public Component(String id, ComponentType componentType, List<String> nextComponentIds) {
     this.id = id;
     this.componentType = componentType;
+    this.nextComponentIds = nextComponentIds;
   }
 
   public ComponentExecutionData executeComponent(WorkflowExecution workflowExecution) {
