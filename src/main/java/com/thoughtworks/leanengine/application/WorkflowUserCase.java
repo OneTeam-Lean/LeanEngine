@@ -3,7 +3,9 @@ package com.thoughtworks.leanengine.application;
 import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowCreateRequestDTO;
 import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowUpdateRequestDTO;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowService;
+import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowExecuteFailedException;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNameExistException;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNotFoundException;
 import java.util.Objects;
@@ -45,5 +47,13 @@ public class WorkflowUserCase {
     if (queryWorkflowById == null) {
       throw new WorkflowNotFoundException();
     }
+  }
+
+  public WorkflowExecution runWorkflow(String workflowId) {
+    WorkflowExecution workflowExecution = workflowService.runWorkflow(workflowId);
+    if (workflowExecution == null) {
+      throw new WorkflowExecuteFailedException();
+    }
+    return workflowExecution;
   }
 }

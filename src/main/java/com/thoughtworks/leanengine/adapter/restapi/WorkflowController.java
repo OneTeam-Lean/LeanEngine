@@ -4,6 +4,7 @@ import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowCreateRequestDTO;
 import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowUpdateRequestDTO;
 import com.thoughtworks.leanengine.application.WorkflowUserCase;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,5 +37,10 @@ public class WorkflowController {
   @PutMapping
   public void updateWorkflow(@RequestBody WorkflowUpdateRequestDTO workflowUpdateRequestDTO) {
     workflowUserCase.updateWorkflow(workflowUpdateRequestDTO);
+  }
+
+  @PostMapping("/execution/{workflowId}")
+  public WorkflowExecution runWorkflow(@PathVariable(value = "workflowId") String workflowId) {
+    return workflowUserCase.runWorkflow(workflowId);
   }
 }
