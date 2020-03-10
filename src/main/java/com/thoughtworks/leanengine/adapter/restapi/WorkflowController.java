@@ -5,6 +5,7 @@ import com.thoughtworks.leanengine.adapter.restapi.dto.WorkflowUpdateRequestDTO;
 import com.thoughtworks.leanengine.application.WorkflowUserCase;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
+import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,7 @@ public class WorkflowController {
   }
 
   @GetMapping("/execution/{workflowId}")
-  public WorkflowExecution getWorkflowExecutions(
+  public List<WorkflowExecution> getWorkflowExecutions(
       @PathVariable(value = "workflowId") String workflowId) {
     return workflowUserCase.getWorkflowExecutions(workflowId);
   }
