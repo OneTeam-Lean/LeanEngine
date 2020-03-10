@@ -40,12 +40,12 @@ public class WorkflowController {
     workflowUserCase.updateWorkflow(workflowUpdateRequestDTO);
   }
 
-  @PostMapping("/execution/{workflowId}")
+  @PostMapping("/{workflowId}/execution")
   public WorkflowExecution runWorkflow(@PathVariable(value = "workflowId") String workflowId) {
     return workflowUserCase.runWorkflow(workflowId);
   }
 
-  @GetMapping("/execution/{workflowId}")
+  @GetMapping("/{workflowId}/executions")
   public List<WorkflowExecution> getWorkflowExecutions(
       @PathVariable(value = "workflowId") String workflowId) {
     return workflowUserCase.getWorkflowExecutions(workflowId);
