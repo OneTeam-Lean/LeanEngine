@@ -43,4 +43,10 @@ public class WorkflowController {
   public WorkflowExecution runWorkflow(@PathVariable(value = "workflowId") String workflowId) {
     return workflowUserCase.runWorkflow(workflowId);
   }
+
+  @GetMapping("/execution/{workflowId}")
+  public WorkflowExecution getWorkflowExecutions(
+      @PathVariable(value = "workflowId") String workflowId) {
+    return workflowUserCase.getWorkflowExecutions(workflowId);
+  }
 }

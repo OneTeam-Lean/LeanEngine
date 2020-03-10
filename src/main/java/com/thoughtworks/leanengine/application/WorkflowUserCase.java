@@ -8,6 +8,7 @@ import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowServi
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowExecuteFailedException;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNameExistException;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowNotFoundException;
+import java.util.List;
 import java.util.Objects;
 import org.springframework.stereotype.Component;
 
@@ -55,5 +56,13 @@ public class WorkflowUserCase {
       throw new WorkflowExecuteFailedException();
     }
     return workflowExecution;
+  }
+
+  public List<WorkflowExecution> getWorkflowExecutions(String workflowId) {
+    Workflow workflow = workflowService.queryWorkflowById(workflowId);
+    if (workflow == null) {
+      throw new WorkflowNotFoundException();
+    }
+    return workflow.getWorkflowExecutions();
   }
 }
