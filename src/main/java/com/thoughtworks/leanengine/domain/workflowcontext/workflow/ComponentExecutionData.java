@@ -1,5 +1,6 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 
+import static com.google.common.collect.Maps.newHashMap;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.BLOCKED;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.FAILED;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.RUNNING;
@@ -18,18 +19,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ComponentExecutionData {
   private Status componentExecutionStatus;
-  private ImmutableMap<String, Object> data;
+  private Map<String, Object> data;
 
   public static ComponentExecutionData createFailedData() {
-    return new ComponentExecutionData(FAILED, ImmutableMap.of());
+    return new ComponentExecutionData(FAILED, newHashMap());
   }
 
   public static ComponentExecutionData createRunningData() {
-    return new ComponentExecutionData(RUNNING, ImmutableMap.of());
+    return new ComponentExecutionData(RUNNING, newHashMap());
   }
 
   public static ComponentExecutionData createSuccessAndEmptyData() {
-    return new ComponentExecutionData(SUCCESS, ImmutableMap.of());
+    return new ComponentExecutionData(SUCCESS, newHashMap());
   }
 
   public static ComponentExecutionData createSuccessData(Map<String, Object> data) {
@@ -37,6 +38,6 @@ public class ComponentExecutionData {
   }
 
   public static ComponentExecutionData createBlockData() {
-    return new ComponentExecutionData(BLOCKED, ImmutableMap.of());
+    return new ComponentExecutionData(BLOCKED, newHashMap());
   }
 }

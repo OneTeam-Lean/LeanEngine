@@ -8,7 +8,6 @@ import com.thoughtworks.leanengine.domain.workflowcontext.components.events.EndE
 import com.thoughtworks.leanengine.domain.workflowcontext.components.events.StartEvent;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.flows.SequenceFlow;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.tasks.AutoTask;
-import com.thoughtworks.leanengine.domain.workflowcontext.components.tasks.ManualTask;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Edge;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Lane;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Position;
@@ -72,14 +71,14 @@ public class ApiTestBase {
                 LocalDateTime.now(),
                 Arrays.asList("sequenceFlowId_2")),
             new SequenceFlow("sequenceFlowId_2", "autoTaskId", Arrays.asList("manualTaskId")),
-            new ManualTask(
+            new AutoTask(
                 "manualTaskId",
                 "manualTaskName",
                 LocalDateTime.now(),
                 LocalDateTime.now(),
                 Arrays.asList("sequenceFlowId_3")),
             new SequenceFlow("sequenceFlowId_3", "manualTaskId", Arrays.asList("endEventId")),
-            new EndEvent("endEventId", "endEvent", null)));
+            new EndEvent("endEventId", "endEvent", newArrayList())));
     workflowPO.setName(name);
     workflowPO.setDiagrams(
         newArrayList(

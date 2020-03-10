@@ -54,6 +54,7 @@ public class ComponentExecution {
     ComponentExecutionData data = ComponentExecutionData.createRunningData();
     // TODO Achieve CANCEL
     try {
+      log.info("now run Component id is:{} , name is :{}", componentId, component.getName());
       data = component.executeComponent(workflowExecution);
     } catch (WorkflowException we) {
       LocalDateTime endDateTime = LocalDateTime.now();

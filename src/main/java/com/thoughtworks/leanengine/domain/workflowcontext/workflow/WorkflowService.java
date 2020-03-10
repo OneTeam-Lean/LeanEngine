@@ -59,4 +59,15 @@ public class WorkflowService {
             originWorkflow.getWorkflowExecutions());
     workflowRepository.save(WorkflowPO.of(mergedWorkflow));
   }
+
+  public WorkflowExecution runWorkflow(String workflowId) {
+    Optional<WorkflowPO> optionalWorkflowPO = workflowRepository.findById(workflowId);
+    if (!optionalWorkflowPO.isPresent()) {
+      return null;
+    }
+    Workflow workflow = optionalWorkflowPO.get().toDomainModel();
+    workflow.execute();
+    workflowRepository.save(WorkflowPO.of(workflow));
+    return workflow.getWorkflowExecutions().get(workflow.getWorkflowExecutions().size() - 1);
+  }
 }

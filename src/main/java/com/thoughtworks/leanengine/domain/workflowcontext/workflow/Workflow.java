@@ -1,5 +1,7 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.ImmutableList;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Component;
@@ -76,6 +78,9 @@ public class Workflow {
 
   public Status execute() {
     WorkflowExecution workflowExecution = new WorkflowExecution(this);
+    if (CollectionUtils.isEmpty(workflowExecutions)) {
+      this.workflowExecutions = newArrayList();
+    }
     this.workflowExecutions.add(workflowExecution);
     return workflowExecution.execute();
   }
