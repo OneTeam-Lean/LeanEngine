@@ -49,6 +49,6 @@ public class ConditionalGateway extends Gateway {
 
   @Override
   public List<String> getNextComponentIds() {
-    return newArrayList(getNextComponentIds().get(nextComponentIdx));
+    return newArrayList(super.getNextComponentIds().get(nextComponentIdx));
   }
 }

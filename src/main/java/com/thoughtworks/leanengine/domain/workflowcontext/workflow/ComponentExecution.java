@@ -27,7 +27,7 @@ public class ComponentExecution {
     ComponentExecution componentExecution = new ComponentExecution();
     componentExecution.component = component;
     componentExecution.componentId = component.getId();
-    componentExecution.componentExecutionData = ComponentExecutionData.createBlockData();
+    componentExecution.componentExecutionData = ComponentExecutionData.createPendingData();
     return componentExecution;
   }
 
