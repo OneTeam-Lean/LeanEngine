@@ -24,7 +24,6 @@ import org.springframework.util.StringUtils;
 public class WorkflowPO implements PersistenceObject<Workflow> {
   @Id private String id;
   private String name;
-  private Status lastExecuteStatus;
   private List<Lane> lanes;
   private List<Component> components;
   private List<Diagram> diagrams;
@@ -54,7 +53,6 @@ public class WorkflowPO implements PersistenceObject<Workflow> {
     workflowPO.setComponents(workflow.getComponents());
     workflowPO.setDiagrams(workflow.getDiagrams());
     workflowPO.setLanes(workflow.getLanes());
-    workflowPO.setLastExecuteStatus(workflow.getLastExecutedStatus());
     if (!CollectionUtils.isEmpty(workflow.getWorkflowExecutions())) {
       workflowPO.setWorkflowExecutionPOs(
           workflow

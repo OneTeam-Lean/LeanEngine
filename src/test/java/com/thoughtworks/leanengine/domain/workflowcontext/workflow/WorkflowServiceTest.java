@@ -31,18 +31,18 @@ class WorkflowServiceTest extends ApiTestBase {
 
   @Test
   void return_run_Component_when_runWorkflow() throws InterruptedException {
-    WorkflowPO workflowPO = workflowRepository.save(buildWorkflowPO("runTest"));
+    WorkflowPO workflowPO = workflowRepository.save(buildWorkflowPO("runStepTest"));
 
     workflowService.runWorkflowByAsync(workflowPO.getId());
     Thread.sleep(10000L);
-    WorkflowPO runTest = workflowRepository.findByName("runTest");
+    WorkflowPO runTest = workflowRepository.findByName("runStepTest");
     WorkflowExecution workflowExecution = runTest.getWorkflowExecutionPOs().get(0).toDomainModel();
 
     assertNotNull(workflowExecution);
 
     assertEquals(
         workflowPO.getComponents().size(), workflowExecution.getComponentExecutions().size());
-    WorkflowPO repoPO = workflowRepository.findByName("runTest");
+    WorkflowPO repoPO = workflowRepository.findByName("runStepTest");
     assertNotNull(repoPO);
     assertEquals(
         repoPO.toDomainModel().getWorkflowExecutions().get(0).getComponentExecutions().size(),
