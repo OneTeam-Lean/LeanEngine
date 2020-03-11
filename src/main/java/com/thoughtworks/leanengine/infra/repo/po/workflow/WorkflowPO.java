@@ -5,7 +5,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Component;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Diagram;
 import com.thoughtworks.leanengine.domain.workflowcontext.diagrams.Lane;
-import com.thoughtworks.leanengine.domain.workflowcontext.enums.Status;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
 import com.thoughtworks.leanengine.infra.common.exceptions.WorkflowCouldNotBeNullException;

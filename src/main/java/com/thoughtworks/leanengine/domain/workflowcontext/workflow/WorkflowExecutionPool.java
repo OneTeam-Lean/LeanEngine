@@ -27,6 +27,7 @@ public class WorkflowExecutionPool {
             log.info("workflow name:{} is executeByStep", workflow.getName());
             workflowRepository.save(WorkflowPO.of(workflow));
           }
+          workflowRepository.save(WorkflowPO.of(workflow));
           log.info("workflow name:{} execute completed.", workflow.getName());
         });
   }

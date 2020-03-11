@@ -21,7 +21,7 @@ public class WorkflowExecution {
   private Status workflowExecutionStatus;
   private List<ComponentExecution> componentExecutions;
   @JsonIgnore private Map<String, ComponentExecution> componentMap;
-  private ThreadLocal<List<ComponentExecution>> executeByStepInfo;
+  @JsonIgnore private ThreadLocal<List<ComponentExecution>> executeByStepInfo;
 
   public WorkflowExecution(Workflow workflow) {
     this.workflowExecutionStatus = Status.RUNNING;
@@ -129,8 +129,12 @@ public class WorkflowExecution {
   }
 
   private void initExecutionData() {
-    if (this.startDateTime != null) {
+    if (this.startDateTime == null) {
       this.startDateTime = LocalDateTime.now();
+    }
+    if (executeByStepInfo == null) {
+      executeByStepInfo = new ThreadLocal<>();
+      executeByStepInfo.set(newArrayList(componentExecutions.get(0)));
     }
   }
 
