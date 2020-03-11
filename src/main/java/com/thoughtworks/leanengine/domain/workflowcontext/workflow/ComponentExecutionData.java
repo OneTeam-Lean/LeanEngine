@@ -3,6 +3,7 @@ package com.thoughtworks.leanengine.domain.workflowcontext.workflow;
 import static com.google.common.collect.Maps.newHashMap;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.BLOCKED;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.FAILED;
+import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.PENDING;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.RUNNING;
 import static com.thoughtworks.leanengine.domain.workflowcontext.enums.Status.SUCCESS;
 
@@ -39,5 +40,9 @@ public class ComponentExecutionData {
 
   public static ComponentExecutionData createBlockData() {
     return new ComponentExecutionData(BLOCKED, newHashMap());
+  }
+
+  public static ComponentExecutionData createPendingData() {
+    return new ComponentExecutionData(PENDING, newHashMap());
   }
 }
