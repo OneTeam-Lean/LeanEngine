@@ -30,17 +30,14 @@ public class ManualTask extends Activity {
 
   @Override
   public ComponentExecutionData executeComponent(WorkflowExecution workflowExecution) {
-    Map<String, Object> data = newHashMap();
-    if (!isTriggered) {
-      try {
-        Thread.sleep(30000L);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      return ComponentExecutionData.createBlockData();
-    }
     Random random = new Random();
     Integer randomNumber = random.nextInt(100);
+    Map<String, Object> data = newHashMap();
+    try {
+      Thread.sleep(randomNumber * 100L);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     data.put("randomNumber", randomNumber);
     return ComponentExecutionData.createSuccessData(data);
   }

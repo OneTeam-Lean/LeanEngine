@@ -65,4 +65,8 @@ public class WorkflowUserCase {
     }
     return workflow.getWorkflowExecutions();
   }
+
+  public boolean runWorkflowAsync(String workflowId) {
+    return workflowService.runWorkflowByAsync(workflowId);
+  }
 }

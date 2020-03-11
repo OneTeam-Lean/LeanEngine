@@ -1,20 +1,26 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.components.gateways;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
 import com.thoughtworks.leanengine.domain.workflowcontext.components.interfaces.Gateway;
 import com.thoughtworks.leanengine.domain.workflowcontext.enums.ComponentType;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.ComponentExecutionData;
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecution;
-import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class ConditionalGateway extends Gateway {
+
+  public static final String GATEWAY_FLAG = "ConditionalGatewayFlag";
+
   public ConditionalGateway() {
     super(ComponentType.CONDITIONAL_GATEWAY);
   }
 
   private String fromComponentId;
+
+  private int nextComponentIdx;
 
   public ConditionalGateway(String fromComponentId) {
     super(ComponentType.CONDITIONAL_GATEWAY);
@@ -27,11 +33,22 @@ public class ConditionalGateway extends Gateway {
     Integer result =
         (Integer) workflowExecution.getComponentExecutionData(fromComponentId, "randomNumber");
     if (result == null || result > 50) {
-      data.put("nextFlowId", Collections.singletonList(this.getFirstFlowId()));
-
+      data.put(GATEWAY_FLAG, false);
+      this.nextComponentIdx = 0;
     } else {
-      data.put("nextFlowId", Collections.singletonList(this.getSecondFlowId()));
+      data.put(GATEWAY_FLAG, true);
+      this.nextComponentIdx = 1;
+    }
+    try {
+      Thread.sleep(5000L);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
     return ComponentExecutionData.createSuccessData(data);
+  }
+
+  @Override
+  public List<String> getNextComponentIds() {
+    return newArrayList(getNextComponentIds().get(nextComponentIdx));
   }
 }

@@ -41,8 +41,8 @@ public class WorkflowController {
   }
 
   @PostMapping("/{workflowId}/execution")
-  public WorkflowExecution runWorkflow(@PathVariable(value = "workflowId") String workflowId) {
-    return workflowUserCase.runWorkflow(workflowId);
+  public boolean runWorkflow(@PathVariable(value = "workflowId") String workflowId) {
+    return workflowUserCase.runWorkflowAsync(workflowId);
   }
 
   @GetMapping("/{workflowId}/executions")

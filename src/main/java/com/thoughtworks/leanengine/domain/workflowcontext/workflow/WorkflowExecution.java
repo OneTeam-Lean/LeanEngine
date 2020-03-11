@@ -21,6 +21,7 @@ public class WorkflowExecution {
   private Status workflowExecutionStatus;
   private List<ComponentExecution> componentExecutions;
   @JsonIgnore private Map<String, ComponentExecution> componentMap;
+  private ThreadLocal<List<ComponentExecution>> executeByStepInfo;
 
   public WorkflowExecution(Workflow workflow) {
     this.workflowExecutionStatus = Status.RUNNING;
@@ -33,6 +34,24 @@ public class WorkflowExecution {
               .collect(
                   Collectors.toMap(ComponentExecution::getComponentId, component -> component));
     }
+    executeByStepInfo = new ThreadLocal<>();
+    executeByStepInfo.set(newArrayList(componentExecutions.get(0)));
+  }
+
+  public WorkflowExecution(
+      LocalDateTime startDateTime,
+      LocalDateTime endDateTime,
+      Status workflowExecutionStatus,
+      List<ComponentExecution> componentExecutions) {
+    this.startDateTime = startDateTime;
+    this.endDateTime = endDateTime;
+    this.workflowExecutionStatus = workflowExecutionStatus;
+    this.componentExecutions = componentExecutions;
+    this.componentMap =
+        componentExecutions
+            .stream()
+            .collect(Collectors.toMap(ComponentExecution::getComponentId, c -> c));
+    // TODO revert execution status
   }
 
   @JsonIgnore
@@ -62,23 +81,57 @@ public class WorkflowExecution {
         turnExecutionToFailedStatus();
         return Status.FAILED;
       }
-      waitExecuteComponent =
-          Stream.concat(
-                  waitExecuteComponent
-                      .stream()
-                      .filter(ComponentExecution::isCompleted)
-                      .flatMap(
-                          componentExecution ->
-                              componentExecution
-                                  .getComponent()
-                                  .getNextComponentIds()
-                                  .stream()
-                                  .map(this::getComponentExecutionById)),
-                  waitExecuteComponent.stream().filter(ComponentExecution::isBlocked))
-              .collect(Collectors.toList());
+      waitExecuteComponent = getNextComponentExecutions(waitExecuteComponent);
     }
     turnExecutionToSuccessStatus();
     return Status.SUCCESS;
+  }
+
+  public Status executeByStep() {
+    initExecutionData();
+    List<ComponentExecution> waitExecuteComponent = executeByStepInfo.get();
+    if (!CollectionUtils.isEmpty(waitExecuteComponent)) {
+      waitExecuteComponent.forEach(componentExecution -> componentExecution.execute(this));
+      if (waitExecuteComponent
+          .stream()
+          .map(ComponentExecution::getStatus)
+          .anyMatch(s -> s == Status.FAILED)) {
+        turnExecutionToFailedStatus();
+        return Status.FAILED;
+      }
+      List<ComponentExecution> nextComponentExecutions =
+          getNextComponentExecutions(waitExecuteComponent);
+      if (CollectionUtils.isEmpty(nextComponentExecutions)) {
+        turnExecutionToSuccessStatus();
+        return Status.SUCCESS;
+      }
+      executeByStepInfo.set(nextComponentExecutions);
+      return Status.RUNNING;
+    }
+    return Status.SUCCESS;
+  }
+
+  private List<ComponentExecution> getNextComponentExecutions(
+      List<ComponentExecution> waitExecuteComponent) {
+    return Stream.concat(
+            waitExecuteComponent
+                .stream()
+                .filter(ComponentExecution::isCompleted)
+                .flatMap(
+                    componentExecution ->
+                        componentExecution
+                            .getComponent()
+                            .getNextComponentIds()
+                            .stream()
+                            .map(this::getComponentExecutionById)),
+            waitExecuteComponent.stream().filter(ComponentExecution::isBlocked))
+        .collect(Collectors.toList());
+  }
+
+  private void initExecutionData() {
+    if (this.startDateTime != null) {
+      this.startDateTime = LocalDateTime.now();
+    }
   }
 
   private void turnExecutionToSuccessStatus() {

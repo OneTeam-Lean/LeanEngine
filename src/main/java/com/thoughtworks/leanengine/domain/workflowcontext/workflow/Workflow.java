@@ -63,7 +63,7 @@ public class Workflow {
   public boolean isLastExecutionCompleted() {
     Status status = getLastExecutedStatus();
     if (status == null) {
-      return false;
+      return true;
     }
     return Status.isCompletedStatus(status);
   }
@@ -77,11 +77,25 @@ public class Workflow {
   }
 
   public Status execute() {
+    WorkflowExecution workflowExecution = initWorkflowExecution();
+    this.workflowExecutions.add(workflowExecution);
+    return workflowExecution.execute();
+  }
+
+  public Status executeByStep() {
+    if (!isLastExecutionCompleted()) {
+      return workflowExecutions.get(workflowExecutions.size() - 1).executeByStep();
+    }
+    WorkflowExecution workflowExecution = initWorkflowExecution();
+    this.workflowExecutions.add(workflowExecution);
+    return workflowExecution.executeByStep();
+  }
+
+  private WorkflowExecution initWorkflowExecution() {
     WorkflowExecution workflowExecution = new WorkflowExecution(this);
     if (CollectionUtils.isEmpty(workflowExecutions)) {
       this.workflowExecutions = newArrayList();
     }
-    this.workflowExecutions.add(workflowExecution);
-    return workflowExecution.execute();
+    return workflowExecution;
   }
 }

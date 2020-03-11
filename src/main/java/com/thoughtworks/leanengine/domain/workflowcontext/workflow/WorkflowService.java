@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class WorkflowService {
   private final WorkflowRepository workflowRepository;
+  private final WorkflowExecutionPool workflowExecutionPool;
 
-  public WorkflowService(WorkflowRepository workflowRepository) {
+  public WorkflowService(
+      WorkflowRepository workflowRepository, WorkflowExecutionPool workflowExecutionPool) {
     this.workflowRepository = workflowRepository;
+    this.workflowExecutionPool = workflowExecutionPool;
   }
 
   public String saveWorkflow(Workflow workflow) {
@@ -32,7 +35,7 @@ public class WorkflowService {
 
   public Workflow queryWorkflowById(String id) {
     Optional<WorkflowPO> workflowPO = workflowRepository.findById(id);
-    return workflowPO.map(WorkflowPO::toDomainModel).orElse(null);
+    return workflowPO.map(WorkflowPO::toDomainModel).orElseThrow(WorkflowNotFoundException::new);
   }
 
   public List<Workflow> queryAllWorkflow() {
@@ -61,13 +64,16 @@ public class WorkflowService {
   }
 
   public WorkflowExecution runWorkflow(String workflowId) {
-    Optional<WorkflowPO> optionalWorkflowPO = workflowRepository.findById(workflowId);
-    if (!optionalWorkflowPO.isPresent()) {
-      return null;
-    }
-    Workflow workflow = optionalWorkflowPO.get().toDomainModel();
+
+    Workflow workflow = queryWorkflowById(workflowId);
     workflow.execute();
     workflowRepository.save(WorkflowPO.of(workflow));
     return workflow.getWorkflowExecutions().get(workflow.getWorkflowExecutions().size() - 1);
+  }
+
+  public boolean runWorkflowByAsync(String workflowId) {
+    Workflow workflow = queryWorkflowById(workflowId);
+    workflowExecutionPool.executeWorkflow(workflow);
+    return true;
   }
 }

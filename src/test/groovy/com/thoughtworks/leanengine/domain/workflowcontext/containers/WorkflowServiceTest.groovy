@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue
 class WorkflowServiceTest extends Specification {
 
     private WorkflowRepository workflowRepository = Stub(WorkflowRepository.class)
-    private WorkflowService workflowService = new WorkflowService(workflowRepository)
+    private WorkflowService workflowService = new WorkflowService(workflowRepository, workflowExecutionPool)
 
 
     def 'should add workflow success'() {
