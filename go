@@ -47,7 +47,7 @@ case "$1" in
     ;;
   "deploy")
     docker stop ${docker_comtainer_name}
-    docker run --rm --name ${docker_comtainer_name} -d -e "SPRING_PROFILES_ACTIVE=prod" -p 9005:8080 ${app_image_fullname}
+    docker run --rm --name ${docker_comtainer_name} -d -e "TZ=Asia/Shanghai" -e "SPRING_PROFILES_ACTIVE=prod" -p 9005:8080 ${app_image_fullname}
     exit 0
     ;;
   "migration")
