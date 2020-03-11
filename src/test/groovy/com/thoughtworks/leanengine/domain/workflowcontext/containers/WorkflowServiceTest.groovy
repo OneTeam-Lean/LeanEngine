@@ -1,6 +1,7 @@
 package com.thoughtworks.leanengine.domain.workflowcontext.containers
 
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.Workflow
+import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowExecutionPool
 import com.thoughtworks.leanengine.domain.workflowcontext.workflow.WorkflowService
 import com.thoughtworks.leanengine.infra.repo.po.workflow.WorkflowPO
 import com.thoughtworks.leanengine.infra.repo.workflow.WorkflowRepository
@@ -13,13 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue
 class WorkflowServiceTest extends Specification {
 
     private WorkflowRepository workflowRepository = Stub(WorkflowRepository.class)
+    private WorkflowExecutionPool workflowExecutionPool = Stub(WorkflowExecutionPool.class)
+
     private WorkflowService workflowService = new WorkflowService(workflowRepository, workflowExecutionPool)
 
 
     def 'should add workflow success'() {
         given:
-        Workflow workflow = new Workflow(null, "testWorkflow", newArrayList(), newArrayList(), newArrayList(),newArrayList())
-        workflowRepository.save(_)>>WorkflowPO.of(workflow)
+        Workflow workflow = new Workflow(null, "testWorkflow", newArrayList(), newArrayList(), newArrayList(), newArrayList())
+        workflowRepository.save(_) >> WorkflowPO.of(workflow)
         when:
         workflowService.saveWorkflow(workflow)
         then:
