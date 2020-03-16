@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       username: root
-      password: root
+      password:
       database: test
       authentication-database: admin
 management:

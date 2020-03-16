@@ -4,6 +4,6 @@ spring:
   data:
     mongodb:
       username: test
-      password: tw2020
-      uri: mongodb://ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn:9002
+      password:
+      uri:
       database: test

@@ -2,9 +2,9 @@ spring:
   data:
     mongodb:
       username: admin
-      password: tw2020
+      password:
       database: admin
-      host: ec2-161-189-97-207.cn-northwest-1.compute.amazonaws.com.cn
+      host:
       port: 9002
 management:
   endpoints:
